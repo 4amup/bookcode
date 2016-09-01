@@ -1,0 +1,10 @@
+#slideshow {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  /*hidden:隐藏溢出的内容。内容只显示在其容器元素的显示区域中，只有部分可见，多余的将被隐藏*/
+  overflow: hidden;
+}
+#preview{
+	position: absolute;
+}

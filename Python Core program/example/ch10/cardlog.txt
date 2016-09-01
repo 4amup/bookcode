@@ -1,0 +1,15 @@
+account log:
+ignored: could not convert string to float: % cat carddata.txt
+ignored: could not convert string to float: # carddata.txt
+ignored: could not convert string to float: ignored: could not convert string to float: previous balance
+data...processing
+ignored: could not convert string to float: debits
+data...processing
+data...processing
+data...processing
+ignored: could not convert string to float: credits
+data...processing
+data...processing
+ignored: could not convert string to float: finance charge/late fees
+data...processing
+data...processing

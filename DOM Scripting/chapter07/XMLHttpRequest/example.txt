@@ -1,0 +1,2 @@
+This was loaded asynchronously!
+此程序不能正常执行的原因是由于“同源策略”，XMLHttpRequest对象发送的请求只能访问与所在的HTML处于同一域中的数据，不能向其他域发送请求。chrome限制Ajax请求使用的协议。file:// 协议是从自己硬盘里加载的，就会看到错误消息：Cross origin requests are only supported for protocol schemes:http,data,chrome,chrome-extension,https,chrome-extension-resource.
