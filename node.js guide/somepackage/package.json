@@ -1,3 +1,21 @@
 {
-  "main" : "./lib/interface.js"
+  "main": "./lib/interface.js",
+  "name": "somepackage",
+  "version": "1.0.0",
+  "description": "test",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "lixiaochun",
+  "license": "ISC",
+  "dependencies": {
+    
+  }
 }
