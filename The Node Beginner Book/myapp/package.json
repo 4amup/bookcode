@@ -1,0 +1,18 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "app.js",
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "lixiaochun",
+  "license": "ISC"
+}
