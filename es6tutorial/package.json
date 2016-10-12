@@ -1,0 +1,27 @@
+{
+  "name": "es6tutorial",
+  "version": "1.0.0",
+  "description": "es6",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "keywords": [
+    "es",
+    "6"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wozhizui/bookcode/tree/master/es6tutorial"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-2": "^6.17.0",
+    "babel-register": "^6.16.3",
+    "traceur": "0.0.111"
+  }
+}
