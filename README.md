@@ -6,3 +6,4 @@
 ## 《Node初学者入门》
 ## 《ECMAScript 6 入门》
 ## 《Node.JS开发指南》
+## 《Node 即学即用》
