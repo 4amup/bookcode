@@ -1,0 +1,15 @@
+body {
+    color: white;
+    background-color: black;
+}
+p {
+    color: yellow;
+    font-family: "arial", sans-serif;
+    font-size: 1.2em;
+}
+.sale {
+    color: red;
+}
+#purchases {
+    border: 1px solid white;
+}
