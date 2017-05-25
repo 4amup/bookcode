@@ -14,32 +14,31 @@
             <li class="sale">Cheese</li>
             <li class="sale">Milk</li>
         </ul>
+        <p>This is just a test.</p>
         <script>
-            // alert(typeof document.getElementById("purchases"));
-            
-            // 使用getElementById，循环遍历
-            // for (var i=0; i<document.getElementsByTagName("li").length; i++) {
-            //     alert(typeof document.getElementsByTagName("li")[i]);
+            // 使用getAttribute
+            // var paras = document.getElementsByTagName('p');
+            // for(var i=0; i<paras.length; i++) {
+            //     var title_text = paras[i].getAttribute('title');
+            //     if(title_text) alert(title_text);
             // }
-            
-            // 使用getElementsByTagName
-            // var items = document.getElementsByTagName("li");
-            // for (var i=0; i<items.length; i++) {
-            //     alert(typeof item[i]);
-            // }
-            
-            // 通配符*在getElementsByTagName中的用法举例，遍历所有节点
-            // alert(document.getElementsByTagName('*').length);
 
-            // 结合使用getElementById和getElementsTagName
+            // 使用setAttribute
             // var shopping = document.getElementById('purchases');
-            // var items = Shopping.getElementsByTagName('*');
-            // alert(items.length);
+            // alert(shopping.getAttribute('title'));
+            // shopping.setAttribute('title', 'a list of goods');
+            // alert(shopping.getAttribute('title'));
 
-            // 使用getElementsByClassName
-            var shopping = document.getElementById('purchases');
-            var items = shopping.getElementsByClassName('sale');
-            alert(items.length);
+            // 遍历更改
+            var paras = document.getElementsByTagName('p');
+            for(let i=0; i<paras.length; i++) {
+                var title_text = paras[i].getAttribute('title');
+                if(title_text) {
+                    paras[i].setAttribute('title', 'brand new title text');
+                    alert(paras[i].getAttribute('title'));
+                }
+            }
+            // 注意setAttribute做出的修改不会反映在文档本身的源代码里
         </script>
     </body>
 </html>
