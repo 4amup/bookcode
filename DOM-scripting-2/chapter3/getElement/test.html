@@ -16,17 +16,30 @@
         </ul>
         <script>
             // alert(typeof document.getElementById("purchases"));
-
+            
+            // 使用getElementById，循环遍历
             // for (var i=0; i<document.getElementsByTagName("li").length; i++) {
             //     alert(typeof document.getElementsByTagName("li")[i]);
             // }
-
+            
+            // 使用getElementsByTagName
             // var items = document.getElementsByTagName("li");
             // for (var i=0; i<items.length; i++) {
             //     alert(typeof item[i]);
             // }
-
             
+            // 通配符*在getElementsByTagName中的用法举例，遍历所有节点
+            // alert(document.getElementsByTagName('*').length);
+
+            // 结合使用getElementById和getElementsTagName
+            // var shopping = document.getElementById('purchases');
+            // var items = Shopping.getElementsByTagName('*');
+            // alert(items.length);
+
+            // 使用getElementsByClassName
+            var shopping = document.getElementById('purchases');
+            var items = shopping.getElementsByClassName('sale');
+            alert(items.length);
         </script>
     </body>
 </html>
