@@ -9,16 +9,22 @@ function prepareGallery () {
     // 功能部分
     for(let i=0; i<links.length; i++) {
         links[i].onclick = function () {
-            showPic(this);
-            return false;
+            return !showPic(this);
         }
     }
 }
 
 function showPic (whichpic) {
-    let source = whichpic.getAttribute('href'),
-        placeholder = document.getElementById('placeholder');
+    let source = whichpic.getAttribute('href');
+    let placeholder = document.getElementById('placeholder');
+    let description = document.getElementById('description');
+    if(!placeholder) return false;
     placeholder.setAttribute('src', source);
+    if(description) {
+        var text = whichpic.getAttribute('title');
+        description.firstChild.nodeValue = text;
+    }
+    return true;
 }
 
 // 以下函数是可以复用的，以后添加到自己的代码库里
