@@ -1,4 +1,7 @@
 window.onload = function() {
     let testdiv = document.getElementById('testdiv');
-    testdiv.innerHTML = "<p>This is <em>my</em> content.</p>";
+    let para = document.createElement('p');
+    testdiv.appendChild(para);
+    let txt = document.createTextNode('Hello world');
+    para.appendChild(txt);
 }
