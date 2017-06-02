@@ -12,3 +12,8 @@
 
 ## 局限性
 1. 通过style属性只能返回内嵌属性
+
+## 复习nodeType
+1. Element代表元素
+2. Attr代表属性
+3. Text代表文本内容
