@@ -1,0 +1,34 @@
+body {
+  font-family: "Heletica", "Arial", sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+table {
+  margin: auto;
+  padding: .2em;
+  font-size: 1.2em;
+}
+th {
+  font-weight: normal;
+  font-style: italic;
+  text-align: left;
+  border: 1px dotted #699;
+  background-color: #9cc;
+  color: #000;
+}
+th, td {
+  width: 10em;
+  padding: .5em;
+}
+.odd {
+  background-color: #ffc;
+}
+/*tr:nth-child(odd) {
+  background-color: #ffc;
+}
+tr:nth-child(even) {
+  background-color: #fff;
+}*/
+/*tr:hover {
+  font-weight: bold;
+}*/
