@@ -1,4 +1,4 @@
-p {
+p#example {
   color: grey;
-  font-family: "Arial", sans-serif;
+  font: 12px "Arial", sans-serif;
 }
