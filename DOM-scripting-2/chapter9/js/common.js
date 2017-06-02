@@ -7,9 +7,6 @@ window.onload = function () {
   }
 
   let para = document.getElementById("example");
-  alert(typeof para.nodeName);
-  alert(typeof para.style);
-  alert(`The color is ${para.style.color}`);
-  alert(`The font family is ${para.style.fontFamily}`);
-  alert(`The font size is ${para.style.fontSize}`);
+  para.style.color = "black";
+  para.style.font = "2em 'Times', serif";
 }
