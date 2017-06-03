@@ -5,6 +5,10 @@ function moveElement(elementID, final_x, final_y, interval) {
   if (elem.movement) {
     clearTimeout(elem.movement);
   }
+  // 对left和top的安全检查
+  if(!elem.style.left) {elem.style.left = '0px'};
+  if(!elem.style.top) {elem.style.top = '0px'};
+  // 正常对元素的left和top属性取值
   let xpos = parseInt(elem.style.left);
   let ypos = parseInt(elem.style.top);
   if(xpos === final_x && ypos === final_y) {
