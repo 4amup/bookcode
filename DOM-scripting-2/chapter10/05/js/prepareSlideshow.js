@@ -1,13 +1,14 @@
 function prepareSlideshow() {
   // 取得DOM中的相关元素
-  let preview = document.getElementById('preview');
+  let slideshow = document.createElement('div');
+  slideshow.setAttribute('id', 'slideshow');
+  let preview = document.createElement('img');
+  preview.setAttribute('src', 'images/topics.gif');
+  preview.setAttribute('alt', 'building blocks of web design');
+  preview.setAttribute('id', 'preview');
+  slideshow.appendChild(preview);
   let list = document.getElementById('linklist');
-  // 检查
-  if(!preview || !list) return;
-  // init，设置基础样式
-  preview.style.position = 'absolute';
-  preview.style.left = '0px';
-  preview.style.top = '0px';
+  insertAfter(slideshow, list);
   // 取得所有链接
   let links = list.getElementsByTagName('a');
   // 为mouseover事件添加动画效果

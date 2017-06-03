@@ -4,3 +4,6 @@
   position: relative;
   overflow: hidden;
 }
+#preview {
+  position: absolute;
+}
