@@ -5,62 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
   </head>
   <body>
-    
-    <div class="container">
-      
-      <div class="page-header">
-        <h1>title<small>subtext</small></h1>
-      </div>
-      
-      <div class="row">
-        
-        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-          
-          <div class="panel panel-default">
-            <div class="panel-body">
-               <p>content</p>
-               
-               
-               <ul class="list-group">
-                 <li class="list-group-item">Item 1</li>
-                 <li class="list-group-item">Item 2</li>
-                 <li class="list-group-item">Item 3</li>
-               </ul>
-               
-               
-               <div class="input-group">
-                 
-                 <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
-                 
-                 <span class="input-group-btn">
-                   <button type="button" class="btn btn-default">Go!</button>
-                 </span>
-                 
-               </div>
-               
-            </div>
-          </div>
-          
-        </div>
+    <div id="content">
+      <div id="room">room name</div>
+      <div id="room-list">list</div>
+      <div id="messages"></div>
 
-        
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          
-          <ul class="list-group">
-            <li class="list-group-item">Item 1</li>
-            <li class="list-group-item">Item 2</li>
-            <li class="list-group-item">Item 3</li>
+      <form id="send-form">
+        <input id="send-message">
+        <input id="send-button" type="submit" value="Send">
+
+        <div id="help">
+          Chat commands:
+          <ul>
+            <li>Change nickname: <code>/nick [username]</code></li>
+            <li>Join/create room: <code>/join [room name]</code></li>
           </ul>
-          
         </div>
-        
-        
-      </div>
-      
+      </form>
     </div>
-    
   </body>
 </html>
