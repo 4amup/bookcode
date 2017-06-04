@@ -72,3 +72,16 @@ article img {
 #contact header {
   background-image: url(../images/drummer.gif);
 }
+
+/*幻灯片的样式，这个类是通过js添加的*/
+#slideshow {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+}
+#preview {
+  position: absolute;
+  border-width: 0;
+  outline-width: 0;
+}
