@@ -86,8 +86,15 @@ function prepareSlideshow() {
   slideshow.appendChild(preview);
   insertAfter(slideshow, intro);
 
+  // 再插入一个窗口的半透明的图
+  let frame = document.createElement('img');
+  frame.setAttribute('src', 'images/frame.gif');
+  frame.setAttribute('alt', 'a frame');
+  frame.setAttribute('id', 'frame');
+  slideshow.appendChild(frame);
+
   // 根据链接显示动画效果
-  let links = intro.getElementsByTagName('a');
+  let links = document.getElementsByTagName('a');
   let destination;
   for(let i=0; i<links.length; i++) {
     links[i].onmouseover = function () {
