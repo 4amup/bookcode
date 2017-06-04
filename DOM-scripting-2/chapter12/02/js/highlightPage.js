@@ -10,6 +10,8 @@ function highlightPage() {
     // 检查当前地址的url是否包含遍历中的某个链接，是则添加类后结束循环
     if(window.location.href.indexOf(linkurl) != -1) {
       links[i].className = 'here';
+      let linktext = links[i].lastChild.nodeValue.toLowerCase();
+      document.body.setAttribute('id', linktext);
       break;
     }
   }

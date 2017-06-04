@@ -60,3 +60,15 @@ article img {
   outline-width: .1em;
   outline-style: solid;
 }
+#about header {
+  background-image: url(../images/lineup.gif);
+}
+#photo header {
+  background-image: url(../images/basshead.gif);
+}
+#live header {
+  background-image: url(../images/bassist.gif);
+}
+#contact header {
+  background-image: url(../images/drummer.gif);
+}
