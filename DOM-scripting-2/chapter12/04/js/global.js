@@ -153,5 +153,50 @@ function prepareInternalnav () {
     }
   }
 }
+
+// 显示图片函数，以前做过
+function showPic(whichpic) {
+  let placeholder = document.getElementById('placeholder');
+  let description = document.getElementById('description');
+  if(!placeholder) return;
+  let source = whichpic.getAttribute('href');
+  placeholder.setAttribute('src', source);
+
+  if(description) {
+    let text = whichpic.getAttribute('title') ? whichpic.getAttribute('title') : '';
+    description.firstChild.nodeValue =text;
+  }
+  return true;
+}
+// 用于插入默认的图片元素
+function preparePlaceholder() {
+  let gallery = document.getElementById('imagegallery');
+  if(!gallery) return;
+  // 插入图片
+  let placeholder = document.createElement('img');
+  placeholder.setAttribute('id', 'placeholder');
+  placeholder.setAttribute('src', 'images/placeholder.gif');
+  placeholder.setAttribute('alt', 'my image gallery');
+  // 插入描述文字
+  let description = document.createElement('p');
+  description.setAttribute('id', 'description');
+  let desctext = document.createTextNode('Choose an image');
+  description.appendChild(desctext);
+  insertAfter(description, gallery);
+  insertAfter(placeholder, description);
+}
+
+function prepareGallery () {
+  let gallery = document.getElementById('imagegallery');
+  if(!gallery) return;
+  let links = gallery.getElementsByTagName('a');
+  for(let i=0; i<links.length; i++) {
+    links[i].onclick = function() {
+      return !showPic(this);
+    }
+  }
+}
 addLoadEvent(prepareSlideshow);
 addLoadEvent(prepareInternalnav);
+addLoadEvent(preparePlaceholder);
+addLoadEvent(prepareGallery);
