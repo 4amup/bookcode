@@ -185,7 +185,7 @@ function preparePlaceholder() {
   insertAfter(description, gallery);
   insertAfter(placeholder, description);
 }
-
+// photo.html事件绑定
 function prepareGallery () {
   let gallery = document.getElementById('imagegallery');
   if(!gallery) return;
@@ -196,7 +196,78 @@ function prepareGallery () {
     }
   }
 }
+// live.html
+function stripeTables() {
+  let tables = document.getElementsByTagName('table');
+  for(let i=0; i<tables.length; i++) {
+    let odd = false;
+    let rows = tables[i].getElementsByTagName('tr');
+    for(let i=0; i<rows.length; i++) {
+      if(odd) {
+        addClass(rows[i], 'odd');
+        odd = false;
+      } else {
+        odd = true;
+      }
+    }
+  }
+}
+// 改变背景颜色
+function highlightRows() {
+  let rows = document.getElementsByTagName('tr');
+  for(let i=0; i<rows.length; i++) {
+    rows[i].oldClassName = rows[i].className;
+    rows[i].onmouseover = function() {
+      addClass(this, 'highlight');
+    }
+    // 鼠标移除后，恢复原先的class
+    rows[i].onmouseout = function() {
+      this.className = this.oldClassName;
+    }
+  }
+}
+
+// 显示缩写词
+function displayAbbreviations() {
+  let abbreviations = document.getElementsByTagName('abbr');
+  if(abbreviations.length<1) return;
+  var defs = [];
+  for(let i=0; i<abbreviations.length; i++) {
+    let current_abbr = abbreviations[i];
+    if(current_abbr.childNodes.length < 1) continue;
+    let definition = current_abbr.getAttribute('title');
+    let key = current_abbr.lastChild.nodeValue;
+    defs[key] = definition;
+  }
+  let dlist = document.createElement('dl');
+  for(key in defs) {
+    let definition = defs[key];
+    let dtitle = document.createElement('dt');
+    let dtitle_text = document.createTextNode(key);
+    dtitle.appendChild(dtitle_text);
+    let ddesc = document.createElement('dd');
+    let ddesc_text = document.createTextNode(definition);
+    ddesc.appendChild(ddesc_text);
+    dlist.appendChild(dtitle);
+    dlist.appendChild(ddesc);
+  }
+  if(dlist.childNodes.length<1) return;
+  let header = document.createElement('h3');
+  let header_text = document.createTextNode('Abbreviations');
+  header.appendChild(header_text);
+  let articles = document.getElementsByTagName('article');
+  if(articles.length === 0) return;
+  let container = articles[0];
+  container.appendChild(header);
+  container.appendChild(dlist);
+}
+
 addLoadEvent(prepareSlideshow);
 addLoadEvent(prepareInternalnav);
+// photo.html
 addLoadEvent(preparePlaceholder);
 addLoadEvent(prepareGallery);
+// live.html
+addLoadEvent(stripeTables);
+addLoadEvent(highlightRows);
+addLoadEvent(displayAbbreviations);
