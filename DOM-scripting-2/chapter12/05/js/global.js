@@ -262,6 +262,48 @@ function displayAbbreviations() {
   container.appendChild(dlist);
 }
 
+// contact.html 点击label元素为对应的input获得焦点
+function focusLabels() {
+  let labels = document.getElementsByTagName('label');
+  for(let i=0; i<labels.length; i++) {
+    if(!labels[i].getAttribute('for')) continue;
+    labels[i].onclick = function() {
+      let id = this.getAttribute('for');
+      if(!document.getElementById(id)) return;
+      let element = document.getElementById(id);
+      element.focus();
+    }
+  }
+}
+// 取得placeholder，将其作为临时值赋值给value
+function resetFields(form) {
+  for(let i=0; i<form.length; i++) {
+    let element = form.elements[i];
+    if(element.type === 'submit') continue;
+    let check = element.placeholder || element.getAttribute('placeholder');
+    if(!check) continue;
+    element.onfocus = function() {
+      let text = this.placeholder || this.getAttribute('placeholder');
+      if(this.value === text) {
+        this.className = '';
+        this.value = "";
+      }
+    }
+    element.onblur = function() {
+      if(this.value === "") {
+        this.className = 'placeholder';
+        this.value = this.placeholder || this.getAttribute('placeholder');
+      }
+    }
+    element.onblur();
+  }
+}
+function prepareForms() {
+  for(let i=0; i<document.forms.length; i++) {
+    let thisform = document.forms[i];
+    resetFields(thisform);
+  }
+}
 addLoadEvent(prepareSlideshow);
 addLoadEvent(prepareInternalnav);
 // photo.html
@@ -271,3 +313,6 @@ addLoadEvent(prepareGallery);
 addLoadEvent(stripeTables);
 addLoadEvent(highlightRows);
 addLoadEvent(displayAbbreviations);
+// contact.html
+addLoadEvent(focusLabels);
+addLoadEvent(prepareForms);
