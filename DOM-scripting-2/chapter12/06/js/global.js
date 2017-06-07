@@ -328,15 +328,61 @@ function validateForm(form) {
   return true;
 }
 
+// Ajax
+function displayAjaxLoading(element) {
+  while(element.hasChildNodes()) {
+    element.removeChild(element.lastChild);
+  }
+  let content = document.createElement('img');
+  content.setAttribute('src', 'images/loading.gif');
+  content.setAttribute('alt', 'Loading...');
+  element.appendchild(content);
+}
+function submitFormWithAjax(whichform, thetarget) {
+  // 创建xml对象
+  let request = new XMLHttpRequest();
+  // 在某对象中显示过度图像
+  displayAjaxLoading(thetarget);
+  let dataParts = [];
+  for(let i=0; i<whichform.elements.length; i++) {
+    let element = whichform.elements[i];
+    dataParts[i] = element.name + '=' + encodeURIComponent(element.value);
+  }
+  // 将数据连接在一起
+  let data = dataParts.join('&');
+  request.open('POST', whichform.getAttribute('action'), true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.onreadystatechange = function() {
+    if(request.readyState === 4) {
+      if(request.status === 200 || request.status ===0) {
+        let matches = request.responseText.match('/<article>([\s\S]+)</article>/');
+        if(matches.length>0) {
+          thetarget.innerHTML = matches[1];
+        } else {
+          thetarget.innerHTML = '<p>Oop, there was an error. Sorry.</p>'
+        }
+      } else {
+        thetarget.innerHTML = '<p>'+request.statusText+'</p>';
+      }
+    }
+  }
+  request.send(data);
+  return true;
+};
+// 提交表单的函数
 function prepareForms() {
   for(let i=0; i<document.forms.length; i++) {
     let thisform = document.forms[i];
     resetFields(thisform);
     thisform.onsubmit = function() {
-      return validateForm(this);
+      if(!validataForm(this)) return;
+      let article = document.getElementsByTagName('article')[0];
+      if(submitFormWithAjax(this, article)) return;
+      return true;
     }
   }
 }
+
 addLoadEvent(prepareSlideshow);
 addLoadEvent(prepareInternalnav);
 // photo.html
