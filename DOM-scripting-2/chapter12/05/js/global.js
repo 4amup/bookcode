@@ -348,6 +348,5 @@ addLoadEvent(highlightRows);
 addLoadEvent(displayAbbreviations);
 // contact.html
 addLoadEvent(focusLabels);
-addLoadEvent(prepareForms);
     // 表单验证
 addLoadEvent(prepareForms);
