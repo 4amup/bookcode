@@ -1,0 +1,17 @@
+{
+  "name": "first-node-app",
+  "version": "1.0.0",
+  "description": "fs",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "fs"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT"
+}
