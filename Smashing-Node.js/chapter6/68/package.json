@@ -1,0 +1,14 @@
+{
+  "name": "tcp-server",
+  "version": "1.0.0",
+  "description": "Our first TCP server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tcp"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT"
+}
