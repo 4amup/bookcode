@@ -1,0 +1,15 @@
+{
+  "name": "irc-client",
+  "version": "1.0.0",
+  "description": "Our first TCP client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "irc",
+    "TCP"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT"
+}
