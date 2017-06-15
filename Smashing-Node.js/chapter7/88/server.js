@@ -1,4 +1,5 @@
 const http = require('http');
+const qs = require('querystring');
 
 http.createServer((req, res) => {
   if('/' === req.url) {
@@ -14,9 +15,19 @@ http.createServer((req, res) => {
       </fieldset>
     </form>
     `);
-  } else if ('/url' === req.url) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(`You sent a <b>${req.method}</b> request.`);
+  } else if ('/url' === req.url && 'POST' === req.method) {
+    let body = '';
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
+
+    req.on('end', () => {
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.end(`<p>Your name is <b>${qs.parse(body).name}</b></p>`);
+    });
+  } else {
+    res.writeHead(404);
+    res.end('Not Found');
   }
 }).listen(3000);
 
