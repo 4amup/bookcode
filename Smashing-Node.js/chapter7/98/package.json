@@ -1,0 +1,15 @@
+{
+  "name": "c-s",
+  "version": "1.0.0",
+  "description": "form",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "server",
+    "client"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT"
+}
