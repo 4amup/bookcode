@@ -14,7 +14,7 @@ let option = {
   path: '/v2/book/search?' + qs.stringify({q: search})
 };
 
-let req = https.request(option, (res) => {
+let req = https.get(option, (res) => {
   let body = '';
   res.setEncoding('utf8');
   
@@ -32,4 +32,5 @@ let req = https.request(option, (res) => {
   });
 });
 
-req.end();
+// req.end();
+// 换用https.get后，无须再调用end方法了
