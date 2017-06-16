@@ -1,0 +1,21 @@
+{
+  "name": "my-website",
+  "version": "1.0.0",
+  "description": "connect",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "connect",
+    "server",
+    "website"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "connect": "^3.6.2",
+    "morgan": "^1.8.2",
+    "serve-static": "^1.12.3"
+  }
+}
