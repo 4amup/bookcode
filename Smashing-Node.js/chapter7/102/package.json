@@ -1,0 +1,17 @@
+{
+  "name": "superagent-test",
+  "version": "1.0.0",
+  "description": "a superagent test",
+  "main": "supter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "superagent"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "superagent": "^3.5.2"
+  }
+}
