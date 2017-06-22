@@ -8,28 +8,25 @@ let app = connect();
 app.use(morgan('dev'));
 
 // 图片托管服务
-// app.use((req, res, next) => {
-//   if('GET' === req.method && '/images' === req.url.substr(0, 7)) {
-//     // 图片托管
-//   } else {
-//     // 交给其他中间件处理
-//     next();
-//   }
-// });
-
-app.use('/images', static(__dirname + '/images'));
+app.use((req, res, next) => {
+  if('GET' === req.method && '/images' === req.url.substr(0, 7)) {
+    // 图片托管
+  } else {
+    // 交给其他中间件处理
+    next();
+  }
+});
 
 // index.html文件
-// app.use((req, res, next) => {
-//   if('GET' === req.method && '/' === req.url) {
-//     // 响应index.html    
-//   } else {
-//     // 交给其他中间件处理
-//     next();
-//   }
-// });
+app.use((req, res, next) => {
+  if('GET' === req.method && '/' === req.url) {
+    // 响应index.html    
+  } else {
+    // 交给其他中间件处理
+    next();
+  }
+});
 
-// app.use('/', static(__dirname));
 
 app.use((req, res, next) => {
   // 这是最后一个中间件，如果到了这里吃，就意味着无能为力
