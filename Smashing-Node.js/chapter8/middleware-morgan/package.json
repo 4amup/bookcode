@@ -1,0 +1,18 @@
+{
+  "name": "middleware-morgan",
+  "version": "1.0.0",
+  "description": "test morgan",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "morgan"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "connect": "^3.6.2",
+    "morgan": "^1.8.2"
+  }
+}
