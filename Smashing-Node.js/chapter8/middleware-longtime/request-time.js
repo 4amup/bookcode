@@ -14,7 +14,9 @@ module.exports = (opts) => {
     // 设置setTimeout
     let timer = setTimeout(longtime, time);
     
-    // 重写res.end 
+    // 重写res.end
+    // 这个res.end是为以后的中间件函数用的
+    // 本例中没有使用这个函数
     let end = res.end;
 
     res.end = (chunk, encoding) => {
