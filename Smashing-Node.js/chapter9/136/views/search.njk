@@ -1,0 +1,10 @@
+<h1>“{{search}}”在豆瓣读书的搜索结果：</h1>
+{% if books.length %}
+  <ul>
+    {% for item in books %}
+      <li>书名：{{item.title}}，作者：{{item.author}}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>搜索无结果</p>
+{% endif %}
