@@ -1,0 +1,19 @@
+{
+  "name": "express-tweet",
+  "version": "1.0.0",
+  "description": "express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "nunjucks": "^3.0.1",
+    "superagent": "^3.5.2"
+  }
+}
