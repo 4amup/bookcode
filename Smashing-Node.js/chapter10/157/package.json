@@ -1,19 +1,18 @@
 {
-  "name": "express-tweet",
+  "name": "websocket-app",
   "version": "1.0.0",
-  "description": "express",
+  "description": "websocket",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "express"
+    "websocket"
   ],
   "author": "lixiaochun",
   "license": "MIT",
   "dependencies": {
     "express": "^4.15.3",
-    "nunjucks": "^3.0.1",
-    "superagent": "^3.5.2"
+    "ws": "^3.0.0"
   }
 }
