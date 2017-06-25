@@ -20,6 +20,10 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+  // 监听消息
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
 });
 
 server.listen(3000, () => {
