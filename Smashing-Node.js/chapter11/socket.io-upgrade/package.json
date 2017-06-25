@@ -1,0 +1,15 @@
+{
+  "name": "socket.io-test",
+  "version": "1.0.0",
+  "description": "socket.io chat",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.3"
+  }
+}
