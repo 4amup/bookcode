@@ -59,17 +59,31 @@
         <button>Send</button>
       </form>
     </ul>
-  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>    <script src="/socket.io/socket.io.js"></script>
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
       $(() => {
-
+        let init; // 定义一个初始状态
         let socket = io();
+        // 如果是第一次连接，输入的信息保存为该用户的昵称
+        // if(!init) {
+        //   $('#m').attr('placeholder', '请输入用户名');
+        //   $('form').submit(() => {
+        //     socket.send()
+        //   })
+        //   init = true;
+        // }
         $('form').submit(() => {
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
           return;
         });
+        // 连接事件
+        socket.on('connect', () => {
+          console.log(socket.id);
+          // 要把这个东西发送给服务端
 
+        })
         // 捕获别的客户端发过来的事件并显示在页面
         socket.on('chat message', (msg) => {
           $('#messages').append($('<li>').text(msg));
