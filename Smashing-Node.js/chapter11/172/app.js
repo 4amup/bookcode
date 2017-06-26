@@ -13,7 +13,16 @@ app.use(express.static('public'));
 
 // 设置连接见监听
 io.on('connection', (socket) => {
-  console.log('Someone connected');
+  // 添加对join事件的监听
+  socket.on('join', (name) => {
+    socket.nickname = name;
+    socket.broadcast.emit('announcement', `{name} joined the chat.`);
+  });
+
+  // 添加对text事件的监听
+  socket.on('text', (msg) => {
+    socket.broadcast.emit('text', socket.nickname, msg);
+  })
 });
 
 // 监听端口
