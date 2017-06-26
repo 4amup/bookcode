@@ -25,14 +25,19 @@ window.onload = () => {
     li.className = 'message';
     li.innerHTML = `<b>${from}</b>: ${text}`;
     document.getElementById('messages').appendChild(li);
+    // 将创建的li元素返回
+    return li;
   }
   // 广播聊天消息
   let input = document.getElementById('input');
   document.getElementById('form').onsubmit = () => {
     // 立即显示消息，不通过服务器
-    addMessage('me', input.value);
+    let li = addMessage('me', input.value);
     // 然后再向服务端发送消息
-    socket.emit('text', input.value);
+    socket.emit('text', input.value, function(data) {
+      li.className = 'confirmed';
+      li.title = data;
+    });
 
     // 重置输入框
     input.value = '';

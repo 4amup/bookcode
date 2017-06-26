@@ -1,3 +1,6 @@
 #chat {
   display: none;
 }
+.confirmed::after {
+  content: url('../images/confirm.png');
+}

@@ -20,9 +20,11 @@ io.on('connection', (socket) => {
   });
 
   // 添加对text事件的监听
-  socket.on('text', (msg) => {
+  socket.on('text', (msg, fn) => {
     socket.broadcast.emit('text', socket.nickname, msg);
-  })
+    // 确认消息已经接收
+    fn(Date.now());
+  });
 });
 
 // 监听端口
