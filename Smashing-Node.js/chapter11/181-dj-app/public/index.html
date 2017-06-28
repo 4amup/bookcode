@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>dj-app</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//cdn.bootcss.com/socket.io/2.0.3/socket.io.js"></script>
+    <script src="js/chat.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="chat">
+      <ul id="messages"></ul>
+      <form id="form">
+        <input type="text" id="input" autocomplete="off">
+        <button>Send</button>
+      </form>
+    </div>
+    <div id="playing"></div>
+    <form id="dj">
+      <h3>Search songs</h3>
+      <input type="text" id="s" autocomplete="off">
+      <ul id="results"></ul>
+      <button>Search</button>
+    </form>
+  </body>
+</html>

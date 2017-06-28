@@ -1,9 +1,9 @@
-window.onload = () => {
+window.onload = function ()  {
   // 创建一个实例
   let socket = io();
 
   // 监听连接事件
-  socket.on('connect', () => {
+  socket.on('connect', function ()  {
     // 通过join事件发送昵称
     socket.emit('join', prompt('What is your name?'));
 
@@ -11,9 +11,9 @@ window.onload = () => {
     document.getElementById('chat').style.display = 'block';
 
     // 监听广播服务端广播的连接信息
-    socket.on('annoucement', (msg) => {
+    socket.on('announcement', function (msg)  {
       let li = document.createElement('li');
-      li.className = 'annoucement';
+      li.className = 'announcement';
       li.innerHTML = msg;
       document.getElementById('messages').appendChild(li);
     });
@@ -28,7 +28,7 @@ window.onload = () => {
   }
   // 广播聊天消息
   let input = document.getElementById('input');
-  document.getElementById('form').onsubmit = () => {
+  document.getElementById('form').onsubmit = function ()  {
     // 立即显示消息，不通过服务器
     addMessage('me', input.value);
     // 然后再向服务端发送消息

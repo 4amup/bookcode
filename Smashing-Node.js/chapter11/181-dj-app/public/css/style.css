@@ -1,0 +1,9 @@
+#chat {
+  display: none;
+}
+#results a {
+  display: none;
+}
+form.isDJ #results a {
+  display: inline;
+}
