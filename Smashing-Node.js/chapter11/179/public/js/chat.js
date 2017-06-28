@@ -11,9 +11,9 @@ window.onload = () => {
     document.getElementById('chat').style.display = 'block';
 
     // 监听广播服务端广播的连接信息
-    socket.on('annoucement', (msg) => {
+    socket.on('announcement', (msg) => {
       let li = document.createElement('li');
-      li.className = 'annoucement';
+      li.className = 'announcement';
       li.innerHTML = msg;
       document.getElementById('messages').appendChild(li);
     });

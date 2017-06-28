@@ -16,7 +16,7 @@ io.on('connection', (socket) => {
   // 添加对join事件的监听
   socket.on('join', (name) => {
     socket.nickname = name;
-    socket.broadcast.emit('announcement', `{name} joined the chat.`);
+    socket.broadcast.emit('announcement', `${name} joined the chat.`);
   });
 
   // 添加对text事件的监听
@@ -24,6 +24,11 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('text', socket.nickname, msg);
     // 确认消息已经接收
     fn(Date.now());
+  });
+
+  // 添加离开事件的监听
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('announcement', `${socket.nickname} left the chat.`);
   });
 });
 
