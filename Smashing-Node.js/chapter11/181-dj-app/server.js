@@ -59,12 +59,13 @@ io.on('connection', (socket) => {
   socket.on('song', (song) => {
     if(socket.dj) {
       currentSong = song;
-      socket.broadcast.emit('song', song);
+      io.emit('song', song);
     }
   });
   // 消息
-  socket.on('text', (msg) => {
+  socket.on('text', (msg, cb) => {
     socket.broadcast.emit('text', socket.nickname, msg);
+    cb(Date.now());
   });
 });
 
