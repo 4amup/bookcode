@@ -1,0 +1,31 @@
+{% extends 'base.njk' %}
+
+{% block body %}
+  <form action="/signup", method="POST">
+    <fieldset>
+      <legend>Sign up</legend>
+      <p>
+        <label for="First">First</label>
+        <input type="text" name="user[first]">
+      </p>
+      <p>
+        <label for="Last">Last</label>
+        <input type="text" name="user[last]">
+      </p>
+      <p>
+        <label for="Email">Email</label>
+        <input type="email" name="user[email]">
+      </p>
+      <p>
+        <label for="Password">Password</label>
+        <input type="password" name="user[password]">
+      </p>
+      <p>
+        <button>Submit</button>
+      </p>
+      <p>
+        <a href="/">Go back</a>
+      </p>
+    </fieldset>  
+  </form>
+{% endblock %}

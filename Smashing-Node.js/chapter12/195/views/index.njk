@@ -1,5 +1,14 @@
 {% extends 'base.njk' %}
 
 {% block body %}
-hello world!
+  {% if (authenticated) %}
+    <p>Welcome back, {{ me.first }}</p>
+    <a href="/logout">Logout</a>
+  {% else %}
+    <p>Welcome new visitor!</p>
+    <ul>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/signup">Signup</a></li>
+    </ul>
+  {% endif %}
 {% endblock %}

@@ -20,7 +20,7 @@ app.set('view engine', 'njk'); //配置文件扩展名为njk
 // 路由
   // 默认路由
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', {authenticated: false});
 });
   // 登陆路由
 app.get('/login', (req, res) => {
