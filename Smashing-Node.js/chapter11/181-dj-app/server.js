@@ -5,7 +5,7 @@ const express = require('express'),
 
 // 实例初始化
 let app = express();
-let server = http.createServer(app);
+let server = http.Server(app);
 let io = Socket(server);
 
 // 静态资源
@@ -66,6 +66,11 @@ io.on('connection', (socket) => {
   socket.on('text', (msg, cb) => {
     socket.broadcast.emit('text', socket.nickname, msg);
     cb(Date.now());
+  });
+
+  // 添加离开事件的监听
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('announcement', `${socket.nickname} left the chat.`);
   });
 });
 

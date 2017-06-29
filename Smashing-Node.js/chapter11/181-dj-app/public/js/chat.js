@@ -1,12 +1,12 @@
-window.onload = function ()  {
-  const socket = io();
-  socket.on('connect', function ()  {
+window.onload = () => {
+  let socket = io();
+  socket.on('connect', () => {
     // 通过join事件发送昵称
     socket.emit('join', prompt('What is your nickname?'));
     // 显示聊天窗口
     document.getElementById('chat').style.display = 'block';
 
-    socket.on('announcement', function (msg)  {
+    socket.on('announcement', (msg) => {
       let li = document.createElement('li');
       li.className = 'announcement';
       li.innerHTML = msg;
@@ -23,16 +23,17 @@ window.onload = function ()  {
   }
 
   let input = document.getElementById('input');
-  document.getElementById('form').onsubmit = function ()  {
+  document.getElementById('form').onsubmit = () => {
     let li = addMessage('me', input.value);
-    socket.emit('text', input.value, function (data)  {
+    socket.emit('text', input.value, (data) => {
       li.className = 'confirmed';
       li.title = data;
     });
     // 重置输入框
     input.value = '';
     input.focus();
-    return;
+    // 为啥这里必须是return false？
+    return false;
   }
   // text事件的监听
   socket.on('text', addMessage);
@@ -69,12 +70,14 @@ window.onload = function ()  {
         a.innerHTML = 'Select';
         a.onclick = function ()  {
           socket.emit('song', song);
+          // 为啥这里也必须是return false
           return false;
         }
         li.appendChild(a);
         results.appendChild(li);
       });
     });
+    // 还有这里必须为啥是return false
     return false;
   }
 
