@@ -40,11 +40,11 @@ window.onload = function ()  {
   let playing = document.getElementById('playing');
   function play (song) {
     if(!song) return;
-    playing.innerHTML = `<hr><b>Now Playing: </b>${song.name}，演唱者：${song.artists[0].name} <br>`;
-    let audio = document.createElement('audio');
-    audio.controls = 'controls';
-    audio.src = song.audio;
-    playing.appendChild(audio);
+    playing.innerHTML = `<hr><b>Now display the album image</b><br>歌曲名：${song.name}，演唱者：${song.artists[0].name} <br>`;
+    let img = document.createElement('img');
+    img.style.width = '200px'
+    img.src = song.album.picUrl;
+    playing.appendChild(img);
   };
 
   socket.on('song', play);
