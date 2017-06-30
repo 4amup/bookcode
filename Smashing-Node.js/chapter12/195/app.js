@@ -29,6 +29,9 @@ app.get('/login', (req, res) => {
 app.get('/signup', (req, res) => {
   res.render('signup');
 });
+app.get('/login/:signupEmail', (req, res) => {
+  res.render('login', {signupEmail: req.params.signupEmail});
+});
 
 // 处理post路由
 app.post('/signup', (req, res, next) => {
@@ -40,7 +43,7 @@ app.post('/signup', (req, res, next) => {
 
 // 连接数据库
 let MongoClient = mongodb.MongoClient;
-let url = 'mongodb://localhost:27017/test'; 
+let url = 'mongodb://localhost:27017/mongodb-test'; 
 MongoClient.connect(url, function(err, db) {
   console.log("连接成功！");
   // 设定快捷方式来连接

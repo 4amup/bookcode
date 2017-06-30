@@ -1,12 +1,15 @@
 {% extends 'base.njk' %}
 
 {% block body %}
+  {% if signupEmail %}
+  <p>congratulations on signing up! Please login below.</p>
+  {% endif %}
   <form action="/login", method="POST">
     <fieldset>
       <legend>Log in</legend>
       <p>
         <label for="Email">Email</label>
-        <input type="email" name="user[email]">
+        <input type="email" name="user[email]" value=signupEmail>
       </p>
       <p>
         <label for="Password">Password</label>
