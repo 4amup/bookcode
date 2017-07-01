@@ -1,0 +1,26 @@
+{% extends 'base.njk' %}
+
+{% block body %}
+  {% if (signupEmail) %}
+  <p>congratulations on signing up! Please login below.</p>
+  {% endif %}
+  <form action="/login", method="POST">
+    <fieldset>
+      <legend>Log in</legend>
+      <p>
+        <label for="Email">Email</label>
+        <input type="email" name="user[email]" value={{ signupEmail }}>
+      </p>
+      <p>
+        <label for="Password">Password</label>
+        <input type="password" name="user[password]">
+      </p>
+      <p>
+        <button>Submit</button>
+      </p>
+      <p>
+        <a href="/">Go back</a>
+      </p>
+    </fieldset>  
+  </form>
+{% endblock %}
