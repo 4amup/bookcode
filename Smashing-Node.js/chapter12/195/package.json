@@ -14,7 +14,9 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
+    "express-session": "^1.15.3",
     "mongodb": "^2.2.29",
     "nunjucks": "^3.0.1"
   }

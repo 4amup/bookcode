@@ -1,7 +1,7 @@
 {% extends 'base.njk' %}
 
 {% block body %}
-  {% if signupEmail %}
+  {% if (signupEmail) %}
   <p>congratulations on signing up! Please login below.</p>
   {% endif %}
   <form action="/login", method="POST">
@@ -9,7 +9,7 @@
       <legend>Log in</legend>
       <p>
         <label for="Email">Email</label>
-        <input type="email" name="user[email]" value=signupEmail>
+        <input type="email" name="user[email]" value={{ signupEmail }}>
       </p>
       <p>
         <label for="Password">Password</label>
