@@ -1,6 +1,6 @@
 // 这个应用准备用最新的无“;”结尾的编码规范写
 const express = require('express')
-  , nunjucks = require('nunjucks') 
+  , nunjucks = require('nunjucks')
 
 // 创建express实例
 let app = express()
@@ -28,6 +28,8 @@ app.get('/item/:id', (req, res, next) => {
 app.post('/item/:id/review', (req, res, next) => {
   //
 })
+
+// 连接数据库
 
 // 监听
 app.listen(3000, () => {
