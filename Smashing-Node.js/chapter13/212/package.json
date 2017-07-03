@@ -1,0 +1,22 @@
+{
+  "name": "shopping-cart-example",
+  "version": "1.0.0",
+  "description": "mysql sequelize shopping",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mysql",
+    "sequelize",
+    "shopping"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mysql": "^2.13.0",
+    "nunjucks": "^3.0.1",
+    "sequelize": "^4.2.1"
+  }
+}
