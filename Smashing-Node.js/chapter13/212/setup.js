@@ -21,7 +21,7 @@ connection.query(`drop table if exists item`);
 connection.query(`create table item(
   id INT(11) AUTO_INCREMENT,
   title VARCHAR(255),
-  dexcription TEXT,
+  description TEXT,
   created DATETIME,
   PRIMARY KEY (id))`);
 

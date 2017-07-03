@@ -1,0 +1,40 @@
+{% extends 'base.njk' %}
+
+{% block body %}
+<a href="/">Go back</a>
+<h2>{{item.title}}</h2>
+<p>{{item.description}}</p>
+<h3>User reviews</h3>
+{% if reviews.length %}
+{% for review in reviews%}
+<p>
+  <b>{{review.stars}} stars<b/>
+  {{review.text}}
+</p>
+{% endfor %}
+{% else %}
+<p>No reviews to show. Write one!</p>
+{% endif %}
+<form action="/item/{{item.id}}/review", method="POST">
+  <fieldset>
+    <legend>Create review</legend>
+    <p>
+      <label for="stars">Stars</label>
+      <select name="stars">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>        
+      </select>
+    </p>
+    <p>
+      <label for="review">Review</label>
+      <textarea name="review"></textarea>
+    </p>
+    <p>
+      <button type="submit">Send</button>
+    </p>
+  </fieldset>
+</form>
+{% endblock %}
