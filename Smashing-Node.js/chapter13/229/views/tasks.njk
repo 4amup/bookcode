@@ -1,0 +1,19 @@
+{% extends 'base.njk' %}
+
+{% block body %}
+<h2 id="{{project.title}}">Tasks for project</h2>
+<div id="list">
+  <ul id="task-list">
+    {% for task in tasks %}
+    <li>
+      <span>{{task.title}}</span>
+      <a href="/task/{{task.id}}" class="delete">x</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<form action="/projects/{{project.id}}/tasks" id="add" method="POST">
+  <input type="text" name="title">
+  <button>Add</button>
+</form>
+{% endblock %}
