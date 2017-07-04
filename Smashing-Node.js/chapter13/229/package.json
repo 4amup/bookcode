@@ -13,7 +13,9 @@
   "author": "lixiaochun",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "mysql": "^2.13.0",
     "nunjucks": "^3.0.1",
     "sequelize": "^4.2.1"
   }
