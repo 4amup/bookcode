@@ -31,7 +31,7 @@ Project.hasMany(Task)
 // 对于hasMany而言，调用find查询到项目后，它们都会有一个名为getTasks的方法来获取项目中的任务。
 // 初次之外，sequelize还支持另一种关系：hasOne。
 
-// 同步
+// 同步后会创建projects和tasks两张表
 sequelize.sync()
 // 创建数据
 
@@ -56,8 +56,15 @@ app.get('/', (req, res, next) => {
 })
 
 // 删除项目路由
+// 页面删除后，也得在数据库删除
 app.delete('/project/:id', (req, res, next) => {
-  //
+  Project.destroy({where: {id: Number(req.params.id)}})
+  .then(() => {
+    res.send(`delete`)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 })
 
 // 创建项目路由
@@ -71,12 +78,18 @@ app.post('/projects', (req, res, next) => {
 
 // 展示指定项目中的任务
 app.get('/project/:id/tasks', (req, res, next) => {
-  //
+  Project.findOne({where: {id: Number(req.params.id)}})
+  .then((project) => {
+    project.getTasks()
+    .then((tasks) => {
+      res.render('tasks', {project: project, tasks: tasks})
+    })
+  })
 })
 
 // 为指定项目添加任务
 app.post('/project/:id/tasks', (req, res, next) => {
-  res.body.ProjectId = req.params.id
+  // res.body.ProjectId = req.params.id
   Task.create(req.body)
   .then((obj) => {
     res.send(obj) //发送JSON数据
@@ -85,7 +98,13 @@ app.post('/project/:id/tasks', (req, res, next) => {
 
 // 删除任务路由
 app.delete('/task/:id', (req, res, next) => {
-  //
+  Task.destroy({where: {id: Number(req.params.id)}})
+  .then(() => {
+    res.send(`delete`)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 })
 
 // 监听

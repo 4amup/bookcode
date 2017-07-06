@@ -6,7 +6,7 @@
   <ul id="projects-list">
     {% for project in projects %}
     <li>
-      <a href="/project/{{project.id}}/items">{{project.title}}</a>
+      <a href="/project/{{project.id}}/tasks">{{project.title}}</a>
       <a href="/project/{{project.id}}" class="delete">x</a>
     </li>
     {% endfor %}
@@ -14,5 +14,6 @@
 </div>
 <form action="/projects" id="add" method="POST">
   <input type="text" name="title">
+  <button>Add</button>
 </form>
 {% endblock %}

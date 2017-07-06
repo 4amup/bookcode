@@ -1,7 +1,7 @@
 {% extends 'base.njk' %}
 
 {% block body %}
-<h2 id="{{project.title}}">Tasks for project</h2>
+<h2 id="{{project.title}}">Tasks for {{project.title}} project</h2>
 <div id="list">
   <ul id="task-list">
     {% for task in tasks %}
@@ -12,8 +12,8 @@
     {% endfor %}
   </ul>
 </div>
-<form action="/projects/{{project.id}}/tasks" id="add" method="POST">
+<form action="/project/{{project.id}}/tasks" id="add" method="POST">
   <input type="text" name="title">
-  <button>Add</button>
+  <button type="submit">Add</button>
 </form>
 {% endblock %}
