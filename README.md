@@ -8,4 +8,4 @@
 - [x] 《Node.JS开发指南》
 - [ ] 《JavaScript设计模式与开发实践》
 - [ ] 《Node.js 实战》--Node.js in Action
-- [ ] 《了不起的Node.js》
+- [x] 《了不起的Node.js》
