@@ -1,0 +1,17 @@
+{
+  "name": "sample-social-graph",
+  "version": "1.0.0",
+  "description": "redis node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "redis"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "redis": "^2.7.1"
+  }
+}
