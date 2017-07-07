@@ -1,5 +1,8 @@
 const redis = require('redis')
 
+// 模块导出
+module.exports = User
+
 // 创建客户端
 let client = redis.createClient();
 
@@ -41,4 +44,10 @@ User.prototype.getFollows = function (callback) {
 // 计算交集，即互相关注的人，即朋友
 User.prototype.getFriends = function (callback) {
   client.sinter(`user:${this.id}:follows`, `user:${this.id}:followers`, callback)
+}
+User.find = function (id, fn) {
+  client.hgetall(`user:${id}:data`, function (err, obj) {
+    if (err) return fn(err)
+    fn(null, new User(id, obj))
+  })
 }
