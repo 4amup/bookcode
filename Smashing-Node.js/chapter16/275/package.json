@@ -1,0 +1,17 @@
+{
+  "name": "assert-sample",
+  "version": "1.0.0",
+  "description": "assert",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "assert"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "superagent": "^3.5.2"
+  }
+}
