@@ -44,11 +44,34 @@
         </header>
 
         <main role="main">
-            <img src="img/okwu.jpg" alt="okwu主页">
-            <img src="img/okwu-athletics.jpg" alt="okwu athletics主页">
-            <img src="img/bartlesvillecf.jpg" alt="Bartlesville主页">
-            <img src="img/emancipation.jpg" alt="emancipation主页">
-
+            
+            <div id="homepage-feature" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#homepage-feature" data-slide-to="0" class="active"></li>
+                    <li data-target="#homepage-feature" data-slide-to="1" class=""></li>
+                    <li data-target="#homepage-feature" data-slide-to="2" class=""></li>
+                    <li data-target="#homepage-feature" data-slide-to="3" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+            
+                    <div class="item active">
+                        <img src="img/okwu.jpg" alt="okwu主页">
+                    </div>
+                    <div class="item">
+                        <img src="img/okwu-athletics.jpg" alt="okwu athletics主页">
+                    </div>
+                    <div class="item">
+                        <img src="img/bartlesvillecf.jpg" alt="Bartlesville主页">
+                    </div>
+                    <div class="item">
+                        <img src="img/emancipation.jpg" alt="emancipation主页">
+                    </div>
+                    
+                </div>
+                <a class="left carousel-control" href="#homepage-feature" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                <a class="right carousel-control" href="#homepage-feature" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+            
             <h2>欢迎！</h2>
             <p>Suspendisse et arcu felis, ac gravida turpis. Suspendisse potenti. Ut porta rhoncus ligula, sed fringilla felis feugiat eget. In non purus quis elit iaculis tincidunt. Donec at ultrices est.</p>
             <p><a href="#">See our portfolio</a></p>
@@ -64,7 +87,7 @@
         </main>
 
         <footer role="contentinfo">
-            
+
             <p>
                 <a href="index.html">
                     <img src="img/logo.png" width="80" alt="Bootstrappin&#39;">
