@@ -416,16 +416,24 @@
     > li > a {
       color: @navbar-default-link-color;
 
+      .icon { // 自定义规则
+        color: @gray-light;
+      }
       &:hover,
-      &:focus {
-        color: @navbar-default-link-hover-color;
-        background-color: @navbar-default-link-hover-bg;
+      &:focus,
+      &:hover .icon, // 自定义规则
+      &focus .icon { // 自定义规则
+        color: @navbar-default-link-active-color;
+        background-color: @navbar-default-link-active-bg;
       }
     }
     > .active > a {
       &,
       &:hover,
-      &:focus {
+      &:focus,
+      .icon, // 自定义规则
+      &:hover .icon, // 自定义规则
+      &focus .icon { // 自定义规则
         color: @navbar-default-link-active-color;
         background-color: @navbar-default-link-active-bg;
       }
