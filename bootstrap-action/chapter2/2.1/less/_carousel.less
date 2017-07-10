@@ -190,7 +190,8 @@
 
 .carousel-indicators {
   position: absolute;
-  bottom: 10px;
+  // bottom: 10px;
+  bottom: 0;
   left: 50%;
   z-index: 15;
   width: 60%;
@@ -198,14 +199,15 @@
   padding-left: 0;
   list-style: none;
   text-align: center;
-
+  margin-bottom: 0;
   li {
     display: inline-block;
-    width:  10px;
-    height: 10px;
-    margin: 1px;
+    width:  18px; // 自定义
+    height: 18px; // 自定义
+    // margin: 1px;
     text-indent: -999px;
-    border: 1px solid @carousel-indicator-border-color;
+    // border: 1px solid @carousel-indicator-border-color;
+    border: @carousel-indicator-bg; // 自定义
     border-radius: 10px;
     cursor: pointer;
 
@@ -221,10 +223,11 @@
     background-color: #000 \9; // IE8
     background-color: rgba(0,0,0,0); // IE9
   }
+  li:hover, // 自定义
   .active {
-    margin: 0;
-    width:  12px;
-    height: 12px;
+    // margin: 0;
+    // width:  12px;
+    // height: 12px;
     background-color: @carousel-indicator-active-bg;
   }
 }
@@ -281,7 +284,7 @@
   }
 
   // Move up the indicators
-  .carousel-indicators {
-    bottom: 20px;
-  }
+  // .carousel-indicators {
+    // bottom: 20px;
+  // }
 }
