@@ -1,0 +1,6 @@
+<FilesMatch "\.(ttf|otf|eot|woff)$">
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+  </IfModule>
+</FilesMatch>
+# 这个文件能够确保无论你的站点使用什么CDN服务，所有浏览器都可以使用你的Web字体。
