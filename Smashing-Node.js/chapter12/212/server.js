@@ -34,8 +34,9 @@ let User = mongoose.model('User', UserSchema);
 // 中间件
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({ secret: 'my secret', resave: false, saveUninitialized: true}));
-// 这是个自定义的中间件，关于session
+app.use(session({ secret: 'my secret', resave: false, saveUninitialized: true}));// 这是个自定义的中间件，关于session
+app.use(express.static('views'));
+
 app.use(function (req, res, next) {
   if (req.session.loggedIn) {
     res.locals.authenticated = true;
