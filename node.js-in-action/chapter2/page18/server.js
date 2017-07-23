@@ -44,7 +44,7 @@ var server = http.createServer((request, response) => {
     filePath = 'public/index.html'
   } else {
     // 转url路径为文件相应路径
-    filePath = `publick${request.url}`;
+    filePath = `public${request.url}`;
   }
   let absPath = `./${filePath}`;
   // 返回静态文件
