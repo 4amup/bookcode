@@ -56,5 +56,5 @@ server.listen(3000, () => {
 });
 
 // 启动socket.io服务器
-// const chatServer = require('./lib/chat_server');
-// chatServer.listen(server);
+const chatServer = require('./lib/chat_server');
+chatServer.listen(server);
