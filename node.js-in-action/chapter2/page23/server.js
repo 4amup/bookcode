@@ -51,8 +51,8 @@ let server = http.createServer((request, response) => {
   serverStatic(response, cache, absPath);
 });
 
-server.listen(3000, () => {
-  console.log("server listening at http://localhost:3000");
+server.listen(3001, () => {
+  console.log("server listening at http://localhost:3001");
 });
 
 // 启动socket.io服务器
