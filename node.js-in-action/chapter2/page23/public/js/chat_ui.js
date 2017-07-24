@@ -3,6 +3,10 @@ var socket = io.connect();
 
 $(document).ready(function () {
   var chatApp = new Chat(socket);
+  
+  socket.on('connect', function () {
+    console.log('客户端逻辑已连接！')
+  });
 
   socket.on('nameResult', function (result) {
     var message;
