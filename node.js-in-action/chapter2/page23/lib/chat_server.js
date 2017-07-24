@@ -10,7 +10,11 @@ let currentRoom = {};
 module.exports = {
   listen: function (server) {
     let io = socketio.listen(server);
-    // io.set('log level', 1); 书中的这个方法已经不再支持
+    // io.set('log level', 1)
+    // 书中的这个方法已经不再支持，这是配置打印日志级别的方法
+    io.on('connection', (socket) => {
+      console.log('一个用户已连接');
+    })
     io.sockets.on('connection', (socket) => {
       console.log('connection!')
       guestNumber = assignGuestName (socket, guestNumber, nickName, namesUesd);
