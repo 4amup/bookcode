@@ -19,10 +19,10 @@ module.exports = {
       });
       // 以下为功能函数部分
       guestNumber = assignGuestName (socket, guestNumber, nickNames, namesUesd);
-      // joinRoom(socket, 'Lobby');
+      joinRoom(socket, 'Lobby');
 
-      // handleMessageBroadcasting(socket, nickNames);
-      // handleNameChangeAttempts(socket, nickNames, namesUesd);
+      handleMessageBroadcasting(socket, nickNames);
+      handleNameChangeAttempts(socket, nickNames, namesUesd);
       // handleRoomJoining(socket);
 
       // ioserver.on('rooms', () => {
@@ -71,4 +71,62 @@ function joinRoom (socket, room) {
     usersInRoomSummary += '.';
     socket.emit('message', {text: usersInRoomSummary});
   }
+}
+
+// 更名请求逻辑
+function handleNameChangeAttempts(socket, nickNames, namesUesd) {
+  socket.on('nameAttempt', (name) => {
+    if (name.indexOf('Guest') === 0) {
+      socket.emit('nameResult', {
+        success: false,
+        message: 'Names cannot begin With "Guest".'
+      });
+    } else {
+      if (namesUesd.indexOf(name) === -1) {
+        let previousName = nickNames[socket.id];
+        let previousNameIndex = namesUesd.indexOf(previousName);
+        namesUesd.push(name);
+        nickNames[socket.id] = name;
+        delete namesUesd[previousNameIndex];
+        socket.emit('nameResult', {
+          success: true,
+          name: name
+        });
+        socket.broadcast.to(currentRoom[socket.id]).emit('message', {
+          text: `${previousName} is now known as ${name}.`
+        });
+      } else {
+        socket.emit('nameResult', {
+          success: false,
+          message: 'That name is already in use.'
+        })
+      }
+    }
+  });
+}
+
+// 聊天消息处理逻辑
+function handleMessageBroadcasting (socket) {
+  socket.on('message', (message) => {
+    socket.broadcast.to(message.room).emit('message', {
+      text: `${nickNames[socket.id]}: ${message.text}`
+    });
+  });
+}
+
+// 加入已有房间的逻辑
+function handleRoomJoining (socket) {
+  socket.on('join', (room) => {
+    socket.leave(currentRoom[socket.id]);
+    joinRoom(socket, room.newRoom);
+  });
+}
+
+// 用户断开连接
+function handleClientDisconnection (socket) {
+  socket.on('disconnect', () => {
+    let nameIndex = namesUesd.indexOf(nickNames[socket.id]);
+    delete namesUesd[nameIndex];
+    delete nickNames[socket.id];
+  })
 }
