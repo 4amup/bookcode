@@ -37,7 +37,7 @@ function serverStatic(response, cache, absPath) {
   }
 }
 
-var server = http.createServer((request, response) => {
+let server = http.createServer((request, response) => {
   let filePath = false;
 
   if(request.url === '/') {
