@@ -8,6 +8,7 @@ $(document).ready(function () {
     console.log('客户端逻辑已连接！')
   });
 
+  // 监听nameresult事件
   socket.on('nameResult', function (result) {
     var message;
     if (result.success) {

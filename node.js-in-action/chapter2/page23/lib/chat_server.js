@@ -7,14 +7,14 @@ let namesUesd = [];
 let currentRoom = {};
 
 module.exports = {
-  listen: function (s) {
-    let io = ioserver.listen(s);
+  listen: function (server) {
+    let io = ioserver.listen(server);
     // io.set('log level', 1)
     // 书中的这个方法已经不再支持，这是配置打印日志级别的方法
     io.sockets.on('connection', function (socket) {
       // 以下为功能函数部分
       guestNumber = assignGuestName (socket, guestNumber, nickNames, namesUesd);
-      // joinRoom(socket, 'Lobby'); // fix the bug
+      joinRoom(socket, 'Lobby', io); // fix the bug
 
       // handleMessageBroadcasting(socket, nickNames);
       // handleNameChangeAttempts(socket, nickNames, namesUesd);
@@ -24,12 +24,12 @@ module.exports = {
       //   socket.emit('room', io.sockets.manager.rooms);
       // });
 
-      // handleClientDisconnection(socket, nickNames, namesUesd);
+      handleClientDisconnection(socket, nickNames, namesUesd);
     });
   }
 }
 
-// 自动分配name的函数
+// 自动分配name，并给当前客户端发送消息的函数
 function assignGuestName (socket, guestNumber, nickNames, namesUesd) {
   let name = 'Guest' + guestNumber;
   nickNames[socket.id] = name;
@@ -43,29 +43,34 @@ function assignGuestName (socket, guestNumber, nickNames, namesUesd) {
 }
 
 // 加入房间事件函数
-function joinRoom (socket, room) {
+function joinRoom (socket, room, io) {
   socket.join(room);
   currentRoom[socket.id] = room;
   socket.emit('joinResult', {room: room});
-  socket.broadcast.to(room).emit('message', {
+  socket.to(room).emit('message', { // 发送给room内所有客户端，除了自己
     text: `${nickNames[socket.id]} has joined ${room}.`
   });
-  
-  let usersInRoom = io.sockets.clients(room);
-  if (usersInRoom.length>1) {
-    let usersInRoomSummary = `Users currently in ${room}: `;
-    for (let index in usersInRoomSummary) {
-      let userSocketId = usersInRoom[index].id;
-      if(userSocketId != socket.id) {
-        if (index>0) {
-          usersInRoomSummary += ', ';
+
+  // 解决io无法传进来，就显式传入了io
+  io.sockets.clients((err, clients) => {
+    if(err) throw err;
+    // 房间里的userid
+    let usersInRoom = clients;
+    if (usersInRoom.length>1) {
+      let usersInRoomSummary = `Users currently in ${room}: `;
+      usersInRoom.forEach((value, index) => {
+        if(value != socket.id) {
+          if(index>0) {
+            usersInRoomSummary += ', ';
+          }
+          usersInRoomSummary += nickNames[value];
         }
-        usersInRoomSummary += nickNames[userSocketId];
-      }
+      })
+      usersInRoomSummary += '.';
+      socket.emit('message', {text: usersInRoomSummary});
     }
-    usersInRoomSummary += '.';
-    socket.emit('message', {text: usersInRoomSummary});
-  }
+
+  });
 }
 
 // 更名请求逻辑
