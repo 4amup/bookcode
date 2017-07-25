@@ -75,7 +75,7 @@ function processUserInput (chatApp, socket) {
 
   if (message.charAt(0) === '/') {  // 如果开始是斜杠，说明是命令
     systemMessage = chatApp.processCommand(message);
-    if(!systemMessage) {
+    if(systemMessage) {
       $('#messages').append(divSystemContentElement(systemMessage));
     }
   } else { // 非命令就广播给其他用户

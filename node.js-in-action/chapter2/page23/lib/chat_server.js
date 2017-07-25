@@ -5,6 +5,7 @@ let guestNumber = 1;
 let nickNames = {};
 let namesUesd = [];
 let currentRoom = {};
+let rooms = []; //自建一个数组存储房间数据
 
 module.exports = {
   listen: function (server) {
@@ -17,12 +18,12 @@ module.exports = {
       joinRoom(socket, 'Lobby', io);
 
       handleMessageBroadcasting(socket, nickNames);
-      // handleNameChangeAttempts(socket, nickNames, namesUesd);
-      // handleRoomJoining(socket);
+      handleNameChangeAttempts(socket, nickNames, namesUesd);
+      handleRoomJoining(socket);
 
-      // ioserver.on('rooms', () => {
-      //   socket.emit('room', io.sockets.manager.rooms);
-      // });
+      socket.on('rooms', () => {
+        socket.emit('rooms', io.sockets.adapter.rooms);
+      });
 
       handleClientDisconnection(socket, nickNames, namesUesd);
     });
@@ -47,28 +48,28 @@ function joinRoom (socket, room, io) {
   socket.join(room);
   currentRoom[socket.id] = room;
   socket.emit('joinResult', {room: room});
-  socket.to(room).emit('message', { // 发送给room内所有客户端，除了自己
+  socket.to(room).emit('message', { // 发送给room内所有客户端
     text: `${nickNames[socket.id]} has joined ${room}.`
   });
 
   // 解决io无法传进来，就显式传入了io
   io.sockets.clients((err, clients) => {
-    if(err) throw err;
+    console.log(clients);
     // 房间里的userid
     let usersInRoom = clients;
     if (usersInRoom.length>1) {
       let usersInRoomSummary = `Users currently in ${room}: `;
-      usersInRoom.forEach((value, index) => {
-        if(value != socket.id) {
+      usersInRoom.forEach((userid, index) => {
+        if(userid != socket.id) {
           if(index > 0) {
             usersInRoomSummary += ', ';
           }
-          usersInRoomSummary += nickNames[value];
+          usersInRoomSummary += nickNames[userid];
         }
       })
       usersInRoomSummary += '.';
       socket.emit('message', {text: usersInRoomSummary});
-    }
+    };
   });
 }
 
