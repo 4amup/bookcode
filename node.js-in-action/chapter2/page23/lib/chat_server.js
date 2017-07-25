@@ -14,9 +14,9 @@ module.exports = {
     io.sockets.on('connection', function (socket) {
       // 以下为功能函数部分
       guestNumber = assignGuestName (socket, guestNumber, nickNames, namesUesd);
-      joinRoom(socket, 'Lobby', io); // fix the bug
+      joinRoom(socket, 'Lobby', io);
 
-      // handleMessageBroadcasting(socket, nickNames);
+      handleMessageBroadcasting(socket, nickNames);
       // handleNameChangeAttempts(socket, nickNames, namesUesd);
       // handleRoomJoining(socket);
 
@@ -60,7 +60,7 @@ function joinRoom (socket, room, io) {
       let usersInRoomSummary = `Users currently in ${room}: `;
       usersInRoom.forEach((value, index) => {
         if(value != socket.id) {
-          if(index>0) {
+          if(index > 0) {
             usersInRoomSummary += ', ';
           }
           usersInRoomSummary += nickNames[value];
@@ -69,7 +69,6 @@ function joinRoom (socket, room, io) {
       usersInRoomSummary += '.';
       socket.emit('message', {text: usersInRoomSummary});
     }
-
   });
 }
 
