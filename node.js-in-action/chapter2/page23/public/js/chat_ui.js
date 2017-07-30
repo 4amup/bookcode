@@ -38,9 +38,9 @@ $(document).ready(function () {
       }
     }
 
-    // fix the bug
+    // 只有一个客户端的时候就有错误，修复了。
     $('#room-list div').click(function () {
-      chatApp.processCommand('/join' + $(this).text());
+      chatApp.processCommand('/join ' + $(this).text());
       $('#send-message').focus();
     });
   });

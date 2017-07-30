@@ -18,9 +18,11 @@ module.exports = {
 
       handleMessageBroadcasting(socket, nickNames);
       handleNameChangeAttempts(socket, nickNames, namesUesd);
-      handleRoomJoining(socket);
+      handleRoomJoining(socket); // 加入已有房间的逻辑
 
       socket.on('rooms', () => {
+        // 这里使用socket.emit和socket.broadcast.emit区别
+        // 前者是向所有客户端广播，后者是向除去自己发射
         socket.emit('rooms', io.sockets.adapter.rooms);
       });
 
@@ -68,7 +70,7 @@ function joinRoom (socket, room) {
           usersInRoomSummary += nickNames[userid];
         }
       })
-      usersInRoomSummary += '.';
+      usersInRoomSummary += ' and you.';
       socket.emit('message', {text: usersInRoomSummary});
     };
   });
@@ -118,8 +120,15 @@ function handleMessageBroadcasting (socket) {
 // 加入已有房间的逻辑
 function handleRoomJoining (socket) {
   socket.on('join', (room) => {
+    // fix the bug
+    if(room.newRoom === currentRoom[socket.id]) {
+      socket.emit('message', {
+        text: `You has been in ${room.newRoom}`
+      });
+      return false;
+    }
     socket.leave(currentRoom[socket.id]);
-    joinRoom(socket, room.newRoom, io);
+    joinRoom(socket, room.newRoom);
   });
 }
 
