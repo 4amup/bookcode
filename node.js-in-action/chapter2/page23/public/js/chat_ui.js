@@ -5,7 +5,7 @@ $(document).ready(function () {
   var chatApp = new Chat(socket);
   
   socket.on('connect', function () {
-    console.log('客户端逻辑已连接！')
+    console.log('客户端逻辑已连接！');
   });
 
   // 监听nameresult事件
@@ -33,12 +33,12 @@ $(document).ready(function () {
     $('#room-list').empty();
 
     for(var room in rooms) {
-      room = room.substring(1, room.length);
       if (room != '') {
         $('#room-list').append(divEscapedContentElement(room));
       }
     }
 
+    // fix the bug
     $('#room-list div').click(function () {
       chatApp.processCommand('/join' + $(this).text());
       $('#send-message').focus();

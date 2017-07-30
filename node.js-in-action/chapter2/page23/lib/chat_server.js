@@ -5,17 +5,16 @@ let guestNumber = 1;
 let nickNames = {};
 let namesUesd = [];
 let currentRoom = {};
-let rooms = []; //自建一个数组存储房间数据
 
 module.exports = {
   listen: function (server) {
-    let io = ioserver.listen(server);
+    io = ioserver.listen(server);
     // io.set('log level', 1)
     // 书中的这个方法已经不再支持，这是配置打印日志级别的方法
     io.sockets.on('connection', function (socket) {
       // 以下为功能函数部分
       guestNumber = assignGuestName (socket, guestNumber, nickNames, namesUesd);
-      joinRoom(socket, 'Lobby', io);
+      joinRoom(socket, 'Lobby');
 
       handleMessageBroadcasting(socket, nickNames);
       handleNameChangeAttempts(socket, nickNames, namesUesd);
@@ -44,17 +43,19 @@ function assignGuestName (socket, guestNumber, nickNames, namesUesd) {
 }
 
 // 加入房间事件函数
-function joinRoom (socket, room, io) {
-  socket.join(room);
-  currentRoom[socket.id] = room;
-  socket.emit('joinResult', {room: room});
-  socket.to(room).emit('message', { // 发送给room内所有客户端
+function joinRoom (socket, room) {
+  socket.leave(socket.id) // 由于默认会加入以socket.id为名字命名的房间，所以让他先离开这个房间
+  socket.join(room, () => {
+    currentRoom[socket.id] = room;
+  })
+  .emit('joinResult', {room: room})
+  .to(room)
+  .emit('message', { // 发送给room内所有客户端
     text: `${nickNames[socket.id]} has joined ${room}.`
-  });
+  }) // Socket实例可以链式操作
 
-  // 解决io无法传进来，就显式传入了io
-  io.sockets.clients((err, clients) => {
-    console.log(clients);
+  // 特定房间中的client
+  io.in(room).clients((err, clients) => {
     // 房间里的userid
     let usersInRoom = clients;
     if (usersInRoom.length>1) {
@@ -118,7 +119,7 @@ function handleMessageBroadcasting (socket) {
 function handleRoomJoining (socket) {
   socket.on('join', (room) => {
     socket.leave(currentRoom[socket.id]);
-    joinRoom(socket, room.newRoom);
+    joinRoom(socket, room.newRoom, io);
   });
 }
 
