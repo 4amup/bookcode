@@ -13,7 +13,7 @@ http.createServer((req, res) => {
 function getTitles (res) {
   fs.readFile('./title.json', (err, data) => {
     if (err) {
-      HadError()
+      HadError(err, res)
     } else {
       let titles = JSON.parse(data.toString()) // 读取数组数据
       // 获取标题后，传参并将控制权交给getTemplate
@@ -25,7 +25,7 @@ function getTitles (res) {
 function getTemplate (titles, res) {
   fs.readFile('./template.html', (err, data) => {
     if (err) {
-      HadError()
+      HadError(err, res)
     } else {
       let tmpl = data.toString()
       // 读取玩html文件后，将控制权交给formatHtml
