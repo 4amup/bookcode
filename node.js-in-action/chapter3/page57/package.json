@@ -1,0 +1,18 @@
+{
+  "name": "rss_feed",
+  "version": "1.0.0",
+  "description": "rss",
+  "main": "random_rss.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rss"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "htmlparser": "^1.7.7",
+    "request": "^2.81.0"
+  }
+}
