@@ -1,0 +1,17 @@
+{
+  "name": "flow",
+  "version": "1.0.0",
+  "description": "flow control",
+  "main": "callback_hell.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nimble"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "nimble": "0.0.2"
+  }
+}
