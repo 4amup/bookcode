@@ -30,6 +30,22 @@ let server = http.createServer((req, res) => {
       res.end(body)
       break
     }
+    case 'DELETE': {
+      let path = url.parse(req.url).pathname
+      let index = parseInt(path.slice(1), 10)
+
+      if (isNaN(index)) {
+        res.statusCode = 400
+        res.end('Invalid item id')
+      } else if (!items[index]) {
+        res.statusCode = 404
+        res.end('Item not found')
+      } else {
+        items.splice(index, 1)
+        res.end('OK\n')
+      }
+    }
+    break
   }
 })
 
