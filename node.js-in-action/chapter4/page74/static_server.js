@@ -12,12 +12,7 @@ let server = http.createServer((req, res) => {
   let url = parse(req.url)
   let path = join(root, url.pathname) //通过url得到文件路径
   let stream = fs.createReadStream(path)
-  stream.on('data', (chunk) => {
-    res.write(chunk)
-  })
-  stream.on('end', () => {
-    res.end()
-  })
+  stream.pipe(res) // 使用水管精简了代码
 })
 
 // 监听3008端口
