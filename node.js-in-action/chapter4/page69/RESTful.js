@@ -21,10 +21,13 @@ let server = http.createServer((req, res) => {
       break
     }
     case 'GET': {
-      items.forEach((item, index) => {
-        res.write(`${index}) ${item}\n`)
-      })
-      res.end()
+      let body = items.map(function (item, index) {
+        return index + ') ' + item
+      }).join('\n')
+      // Content-Length应该是字节长度，而不是字符长度
+      res.setHeader('Content-Length', Buffer.byteLength(body))
+      res.setHeader('Content-Type', 'text/plain; charset="utf-8"')
+      res.end(body)
       break
     }
   }
