@@ -46,10 +46,8 @@ function show (res) {
     ${list}
     </ul>
     <form action="/" method="post">
-      <input type="text" name="item">
-      <br>
-      <br>
-      <input type="submit" value="Add Item">
+      <p><input type="text" name="item"></p>
+      <p><input type="submit" value="Add Item"></p>
     </form>
   </body>
 </html>`
