@@ -13,6 +13,10 @@ let server = http.createServer((req, res) => {
   let path = join(root, url.pathname) //通过url得到文件路径
   let stream = fs.createReadStream(path)
   stream.pipe(res) // 使用水管精简了代码
+  stream.on('error', (err) => {
+    res.statusCode = 500
+    res.end('Internal Server Error')
+  })
 })
 
 // 监听3008端口
