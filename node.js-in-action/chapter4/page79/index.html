@@ -4,14 +4,24 @@
     <title>todo-list</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
     <h1>To-do List</h1>
     <ul id="list"></ul>
-    <form action="/" method="post">
+    <form action="/" method="post" enctype="multipart/form-data">
       <p><input type="text" name="item"></p>
-      <p><input type="submit" value="Add Item"></p>
+      <p><input type="file" name="file"></p>
+      <p><input type="submit" value="Upload"></p>
+      <p id="upload-progress"></p>
     </form>
+    <script src="//lib.baomitu.com/socket.io/2.0.3/socket.io.js"></script>
+    <script>
+      var socket = io()
+      var progress = document.getElementById('upload-progress')
+
+      socket.on('progress', data => {
+        progress.textContent = data.progress + '%'
+      })
+    </script>
   </body>
 </html>

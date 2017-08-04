@@ -13,6 +13,7 @@
   "author": "lixiaochun",
   "license": "MIT",
   "dependencies": {
-    "formidable": "^1.1.1"
+    "formidable": "^1.1.1",
+    "socket.io": "^2.0.3"
   }
 }

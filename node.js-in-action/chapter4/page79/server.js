@@ -5,19 +5,28 @@ const http = require('http'),
       fs = require('fs'),
       formidable = require('formidable')
 
+const EventEmitter = require('events');
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+      
 // __dirname是一个神奇的变量，他的值是该文件所在目录的路径
 let root = __dirname
 let items = []
 
-// 创建服务器
+// 创建服务器，用var提升变量
 let server = http.createServer((req, res) => {
+  const io = require('socket.io')(server) //fix bug
+
+  if ('/favicon.ico' === req.url) return
   if ('/' === req.url) {
     switch (req.method) {
       case 'GET':
         show(req, res)
         break
       case 'POST':
-        upload(req, res)
+        upload(req, res, io)
         break
       default:
         badRequest(res)
@@ -40,18 +49,26 @@ function show (req, res) {
     <title>todo-list</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
     <h1>To-do List</h1>
-    <ul id="list">
-    ${list}
-    </ul>
+    <ul id="list">${list}</ul>
     <form action="/" method="post" enctype="multipart/form-data">
       <p><input type="text" name="item"></p>
       <p><input type="file" name="file"></p>
       <p><input type="submit" value="Upload"></p>
+      <p id="upload-progress"></p>
     </form>
+    <script src="//lib.baomitu.com/socket.io/2.0.3/socket.io.js"></script>
+    <script>
+      var socket = io('');
+      var progress = document.getElementById('upload-progress')
+
+      socket.on('progress', data => {
+        console.log(data)
+        progress.textContent = data.progress + '%'
+      })
+    </script>
   </body>
 </html>`
   res.setHeader('Content-Type', 'text/html')
@@ -86,7 +103,7 @@ function add (req, res) {
 }
 
 // 文件上传逻辑
-function upload (req, res) {
+function upload (req, res, io) {
   if (!isFormData(req)) {
     res.statusCode = 400
     res.end('Bad Request: expecting multipart/form-data')
@@ -96,13 +113,14 @@ function upload (req, res) {
   let form = new formidable.IncomingForm()
   form.parse(req, (err, fields, files) => {
     console.log(fields)
-    // console.log(files)
+    console.log(files)
     res.end('upload complete!')
   })
   form.on('progress', function(bytesReceived, bytesExpected) {
-    let percent = Math.floor(bytesReceived / bytesExpected * 100)
+    let percent = (Math.floor(bytesReceived / bytesExpected * 100))
     console.log(percent)
-  });
+    io.emit('progress', {progress: percent}) //fix bug
+  })
 }
 
 // 是否是formdata
