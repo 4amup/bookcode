@@ -49,12 +49,13 @@ let server = http.createServer((req, res) => {
 
 // 建表后通过回调函数启动服务器
 db.query(
-  `CREATE TABLE IF NOT EXISTS "runoob_tbl"(
-    "runoob_id" INT UNSIGNED AUTO_INCREMENT,
-    "runoob_title" VARCHAR(100) NOT NULL,
-    "runoob_author" VARCHAR(40) NOT NULL,
-    "submission_date" DATE,
-    PRIMARY KEY ( "runoob_id" )
+  `CREATE TABLE IF NOT EXISTS work(
+    id INT(10) NOT NULL AUTO_INCREMENT,
+    hours DECIMAL(5,2) DEFAULT 0,
+    data DATE,
+    archived INT(1) DEFAULT 0,
+    description LONGTEXT,
+    PRIMARY KEY (id)
   )`, err => {
     if (err) throw err
     console.log('Server started...')
