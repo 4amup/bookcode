@@ -30,7 +30,7 @@ let server = http.createServer((req, res) => {
           work.archive(db, req, res)
           break
         case '/delete':
-          work.archive(db, req, res)
+          work.delete(db, req, res)
           break
       }
       break
@@ -55,8 +55,7 @@ db.query(
     data DATE,
     archived INT(1) DEFAULT 0,
     description LONGTEXT,
-    PRIMARY KEY (id)
-  )`, err => {
+    PRIMARY KEY (id))`, err => {
     if (err) throw err
     console.log('Server started...')
     server.listen(3000, () => {
