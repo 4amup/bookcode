@@ -23,12 +23,10 @@ function parseRecivedData (req, cb) {
 }
 
 function actionForm (id, path, label) {
-  let html = `
-  <form method="POST" action="${path}">
+  let html = `<form method="POST" action="${path}">
     <input type="hidden" name="id" value="${id}">
     <input type="submit" value="${label}">
-  </form>
-  `
+  </form>`
   return html
 }
 
@@ -54,8 +52,7 @@ function workHitlistHtml (rows) {
 
 // 渲染html表单
 function workFormHtml () {
-  let html =
-  `<form method="POST" action="/">
+  let html =`<form method="POST" action="/">
     <p>
       <label for="date">Date (YYYY-MM-DD):</label>
       <input name="date" type="text">
@@ -84,8 +81,7 @@ function workDeleteForm (id) {
 // 增-增加一条工作记录
 function add (db, req, res) {
   parseRecivedData(req, work => {
-    db.query(
-      `INSERT INTO work(hours, data, description)
+    db.query(`INSERT INTO work(hours, date, description)
       VALUES
       (?, ?, ?)`, // ???占位符，防止SQL注入攻击
       [work.hours, word.date, work.description], // 数据解析
@@ -100,43 +96,36 @@ function add (db, req, res) {
 // 删-删除数据
 function deleteItem (db, req, res) {
   parseRecivedData(req, work => {
-    db.query(
-      `DELETE FROM work WHERE id=?`,
-      [work.id],
-      err => {
-        if (err) throw err
-        show(db, res)
-      }
-    )
+    db.query(`DELETE FROM work WHERE id=?`, [work.id], err => {
+      if (err) throw err
+      show(db, res)
+    })
   })
 }
 
 // 改-更新一条工作记录
 function archive (db, req, res) {
   parseRecivedData(req, work => {
-    db.query(
-      `UPDATE work SET archived=1 WHERE id=?`,
-      [work.id],
-      err => {
-        if (err) throw err
-        show(db, res)
-      }
-    )
+    db.query(`UPDATE work SET archived=1 WHERE id=?`, [work.id],err => {
+      if (err) throw err
+      show(db, res)
+    })
   })
 }
 
 // 查-显示函数
 function show (db, res, showArchived) {
-  let query = `
-  SELECT * FROM work
+  // MySQL命令
+  let query = `SELECT * FROM work
   WHERE archived=?
   ORDER BY date DESC`
+  // 三元操作符取值
   let archiveValue = (showArchived) ? 1 : 0
+  // 开始操作数据库
   db.query(query, [archiveValue], (err, rows) => {
     if (err) throw err
-    html = (showArchived)
-    ? ''
-    : `<a href="/archived">Archived Work</a>`
+    // 三元操作符
+    html = (showArchived) ? '' : `<a href="/archived">Archived Work</a>`
     html += workHitlistHtml(rows)
     html += workFormHtml()
     sendHtml(res, html)
@@ -146,4 +135,8 @@ function show (db, res, showArchived) {
 module.exports = {
   // 以下是增删查改了
   add: add,
+  delete: deleteItem,
+  show: show,
+  archive: archive,
+  showArchived: showArchived
 }

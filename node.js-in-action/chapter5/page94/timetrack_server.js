@@ -3,19 +3,19 @@ const http = require('http'),
       work = require('./lib/timetrack')
 
 // 数据库配置
-let db = mysql.createConnection({
+const db = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '8307',
   database : 'timetrack'
 })
 // 连接数据库，有错误处理
-db.connect(err => {
+db.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
     return;
-  }
-  console.log('connected as id ' + connection.threadId);
+  } 
+  console.log('connected as id ' + db.threadId);
 })
 
 // 创建服务器
@@ -47,17 +47,18 @@ let server = http.createServer((req, res) => {
   }
 })
 
+// 使用这个数据库
+db.query(`USE timetrack`);
+
 // 建表后通过回调函数启动服务器
-db.query(
-  `CREATE TABLE IF NOT EXISTS work(
-    id INT(10) NOT NULL AUTO_INCREMENT,
-    hours DECIMAL(5,2) DEFAULT 0,
-    data DATE,
-    archived INT(1) DEFAULT 0,
-    description LONGTEXT,
-    PRIMARY KEY (id))`, err => {
+db.query(`CREATE TABLE IF NOT EXISTS work(
+  id INT(10) NOT NULL AUTO_INCREMENT,
+  hours DECIMAL(5,2) DEFAULT 0,
+  date DATE,
+  archived INT(1) DEFAULT 0,
+  description LONGTEXT,
+  PRIMARY KEY (id))`, err => {
     if (err) throw err
-    console.log('Server started...')
     server.listen(3000, () => {
       console.log('http://localhost:3000')
     })
