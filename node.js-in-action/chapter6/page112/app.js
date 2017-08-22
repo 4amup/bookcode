@@ -40,6 +40,7 @@ function admin(req, res, next) {
     case '/users':
       res.setHeader('Content-Type', 'application/json')
       res.end(JSON.stringify(['mobi', 'pdf', 'txt']))
+      break
   }
 }
 
@@ -50,8 +51,8 @@ function authenticcateWithDatabase (user, pass, callback) {
 
 // 使用中间件
 app.use(logger)
-// app.use('/admin', restrict)
-// app.use('/admin', admin)
+app.use('/admin', restrict)
+app.use('/admin', admin)
 app.use(hello)
 
 // 监听3000端口
