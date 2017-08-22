@@ -50,8 +50,8 @@ function authenticcateWithDatabase (user, pass, callback) {
 
 // 使用中间件
 app.use(logger)
-app.use('/admin', restrict)
-app.use('/admin', admin)
+// app.use('/admin', restrict)
+// app.use('/admin', admin)
 app.use(hello)
 
 // 监听3000端口
