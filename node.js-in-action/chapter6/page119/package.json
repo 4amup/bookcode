@@ -1,0 +1,17 @@
+{
+  "name": "page119",
+  "version": "1.0.0",
+  "description": "middle",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "logger"
+  ],
+  "author": "lixiaochun",
+  "license": "MIT",
+  "dependencies": {
+    "connect": "^3.6.3"
+  }
+}
