@@ -1,17 +1,6 @@
 const connect = require('connect')
 const app = connect()
 
-// 使用中间件
-app.use(logger)
-app.use('/admin', restrict)
-app.use('/admin', admin)
-app.use(hello)
-
-// 监听3000端口
-app.listen(3000, () => {
-  console.log('http://localhost:3000')
-})
-
 // 做日志的中间件
 function logger (req, res, next) {
   console.log('%s %s', req.method, req.url)
@@ -37,7 +26,7 @@ function restrict(req, res, next) {
 
   authenticcateWithDatabase(user, pass, err => {
     if (err) return next(err) // 告诉分配器出错了
-    
+
     next() // 如果认证完成，不带参数调用next
   })
 }
@@ -58,3 +47,14 @@ function admin(req, res, next) {
 function authenticcateWithDatabase (user, pass, callback) {
   //
 }
+
+// 使用中间件
+app.use(logger)
+app.use('/admin', restrict)
+app.use('/admin', admin)
+app.use(hello)
+
+// 监听3000端口
+app.listen(3000, () => {
+  console.log('http://localhost:3000')
+})
