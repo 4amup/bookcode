@@ -32,9 +32,12 @@ app.use(bodyParser.urlencoded({ extended: false })); //窗体数据被编码为�
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 路由
 app.use('/', index);
 app.use('/users', users);
 app.use('/photos', photos);
+app.get('/upload', upload)
+app.post('/upload', submit)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
