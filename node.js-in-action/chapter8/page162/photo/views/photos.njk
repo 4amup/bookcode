@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <p>Express stock photos application.</p>
+    <div id="photos">
+      {% for photo in photos %}
+        <div class="photo">
+          <h2>{{ photo.name }}</h2>
+          <img src="{{ photo.path }}" alt="{{ photo.name }}">
+        </div>
+      {% else %}
+        <div>This would display if the 'photos' collection were empty</div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
