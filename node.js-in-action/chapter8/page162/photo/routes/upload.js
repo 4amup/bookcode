@@ -1,7 +1,8 @@
 var express = require('express');  
 var formidable = require('formidable');  
 var router = express.Router();  
-var fs =require('fs'); 
+var fs =require('fs');
+var Photo = require('../model/Photo')
 
 
 /* GET upload page. */
@@ -28,17 +29,28 @@ router.post('/', function(req, res) {
   });  
   //返回非文件的部分数据  
   form.on('field', function(name, value) {  
-    console.log(name+" "+value)  
+    console.log(name+"<->"+value)
   });  
   //文件上传成功后触发  
   form.on('file', function(name, file) {  
-    if(file.type!='text/css'){//文件类型不是合法的  
-      this.emit('error',"不允许的类型");//手动触发error  
-      fs.unlink(file.path)//删掉临时文件  
+    if(file.type!=='image/png'){//文件类型不是合法的  
+      this.emit('error',"只允许上传后缀为png格式的文件");//手动触发error  
+      fs.unlink(file.path)//删掉临时文件
     }  
     else {  
       //成功上传，把临时文件移动到public文件夹下面  
-      fs.renameSync(file.path, "./public/" + file.name);  
+      fs.rename(file.path, "./public/images/" + file.name, err => {
+        if (err) return next(err)
+        // 数据库中写入数据
+        let photo = new Photo({
+          name: file.name,
+          path: "./public/images/" + file.name
+        })
+        photo.save(err => {
+          if (err) return next(err)
+          // saved.
+        })
+      })
     }  
   });  
   //流程正常处理  
@@ -48,12 +60,12 @@ router.post('/', function(req, res) {
   //出错  
   form.on('error',function(err){  
     res.end(err);  
-  })  
+  })
   //执行文件上传任务  
   form.parse(req,function(){  
   
   });  
   
-});  
+});
   
 module.exports = router;
