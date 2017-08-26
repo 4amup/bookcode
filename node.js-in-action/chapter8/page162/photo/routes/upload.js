@@ -13,7 +13,8 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   let form = new formidable.IncomingForm()
   form.uploadDir = "../images"
-  form.parse(req, (err, field, files) => {
+  form.parse(req, (error, field, files) => {
+    if (error) throw error
     res.writeHead(200, {'Content-Type': 'text/plain'})
     res.write('received upload')
     res.end(fields, files)
