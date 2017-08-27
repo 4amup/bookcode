@@ -35,9 +35,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 路由
-app.use('/', index);
+app.use('/', photos); // 首页直接显示照片列表
 app.use('/users', users);
-app.use('/photos', photos);
 app.use('/upload', upload);
 app.use('/photo', download)
 

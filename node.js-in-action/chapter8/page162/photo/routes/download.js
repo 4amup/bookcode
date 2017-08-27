@@ -8,7 +8,8 @@ router.get('/:id/download', (req, res, next) => {
     if (err) return next(err)
     // 构造了一个绝对路径
     let filepath = path.join(__dirname.substr(0, __dirname.length-6), 'public/' + photo.path)
-    res.sendFile(filepath)
+    // res.sendFile(filepath)
+    res.download(filepath, photo.name)
   })
 })
 
