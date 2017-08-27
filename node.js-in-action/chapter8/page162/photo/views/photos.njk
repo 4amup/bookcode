@@ -11,6 +11,7 @@
       {% for photo in photos %}
         <div class="photo">
           <h2>{{ photo.name }}</h2>
+          <a href="/photo/{{ photo.id }}/download"></a>
           <img src="{{ photo.path }}" alt="{{ photo.name }}">
         </div>
       {% else %}
