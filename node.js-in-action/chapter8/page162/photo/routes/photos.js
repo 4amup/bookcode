@@ -1,22 +1,15 @@
 const express = require('express');
 const router = express.Router();
-
-// 模拟数据库实现
-let photos = []
-photos.push({
-  name: 'Node.js Logo',
-  path: 'http://nodejs.cn/static/images/logo.svg'
-})
-photos.push({
-  name: 'test photo',
-  path: 'https://mozilla.github.io/nunjucks/img/marketplace2x.png'
-})
+const Photo = require('../model/Photo')
 
 /* 列表路由 */
 router.get('/', function(req, res, next) {
-  res.render('photos', {
-    title: 'Photos',
-    photos: photos
+  Photo.find({}, (err, photos) => {
+    if (err) return next(err)
+    res.render('photos', {
+      title: 'Photos',
+      photos: photos
+    })
   })
 });
 

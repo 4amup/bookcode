@@ -44,7 +44,7 @@ router.post('/', function(req, res) {
         // 数据库中写入数据
         Photo.create({
           name: file.name,
-          path: "./public/images/" + file.name
+          path: "images/" + file.name
         })
       })
     }
