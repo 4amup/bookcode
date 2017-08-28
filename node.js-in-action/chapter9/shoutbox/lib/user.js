@@ -75,5 +75,36 @@ User.prototype.hashPassword = function (cb) {
 //   if (err) throw err
 //   console.log(`user id ${tobi.id}`)
 // })
+User.getByName = function (name, fn) {
+  User.getId(name, function (err, id) { // 根据名称查找用户
+    if (err) return fn(err)
+    User.get(id, fn) // 用ID抓取用户
+  })
+}
+
+User.getId = function (name, fn) {
+  db.get('user:id' + name, fn) // 取得由名称索引的ID
+}
+
+User.get = function (id, fn) {
+  db.hgetall('user:' + id, function (err, user) {
+    if (err) return fn(err)
+    fn(null, new User(user)) // 将普通对象转换成新的User
+  })
+}
+
+// 认证
+User.anthenticate = function (name, pass, fn) {
+  User.getByName(name, function (err, user) { // 通过名称查找用户
+    if (err) return fn(err)
+    if (!user.id) return fn() // 用户不存在
+    // 以相同方式对密码做加盐处理
+    crypto.pbkdf2(pass, 'salt', 100000, 512, 'sha512', (err, derivedKey) => {
+      if (err) return fn(err)
+      if (derivedKey === user.pass) return fn(null, user) // 匹配发现项
+      fn()
+    })
+  })
+}
 
 module.exports = User
