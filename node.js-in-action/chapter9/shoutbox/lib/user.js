@@ -28,6 +28,8 @@ User.prototype.save = function (cb) {
     this.update(cb)
   } else {
     let user = this
+    // 对存储在指定key的数值执行原子的加1操作。
+    // 如果指定的key不存在，那么在执行incr操作之前，会先将它的值设定为0。
     db.incr('user:ids', (err, id) => { // 创建唯一id
       if (err) return cb(err)
       user.id = id // 设定id，以便保存
@@ -63,15 +65,15 @@ User.prototype.hashPassword = function (cb) {
 }
 
 // 测试用户保存逻辑
-let tobi = new User({
-  name: 'Tobi',
-  pass: `I'm a ferret`,
-  age: '2'
-})
+// let tobi = new User({
+//   name: 'Tobi',
+//   pass: `I'm a ferret`,
+//   age: '2'
+// })
 
-tobi.save(err => {
-  if (err) throw err
-  console.log(`user id ${tobi.id}`)
-})
+// tobi.save(err => {
+//   if (err) throw err
+//   console.log(`user id ${tobi.id}`)
+// })
 
 module.exports = User
