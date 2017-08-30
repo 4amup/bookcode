@@ -39,6 +39,12 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/register', register);
 app.use('/login', login);
+app.get('/logout', function (req, res, next) { // 登出销毁session
+  req.session.destroy(err => {
+    if (err) throw err
+    res.redirect('/')
+  })
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
