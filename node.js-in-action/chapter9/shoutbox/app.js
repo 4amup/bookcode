@@ -6,12 +6,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
 const session = require('express-session');
-const message = require('./lib/message')
+// 自定义中间件部分
+let message = require('./lib/message');
+let user = require('./lib/middleware/user')
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 var register = require('./routes/register');
-var login = require('./routes/login')
+var login = require('./routes/login');
 var app = express();
 
 // view engine setup
@@ -32,11 +33,11 @@ app.use(session({
   secret: 'shoutbox',
   cookie: {maxAge: 1000 * 60} // 过期时间一分钟
 }))
-app.use(message) // 自定义的一个消息处理中间件
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(message) // 自定义的一个消息处理中间件
+app.use(user) // 自定义了一个通过session给页面传递user变量的中间件
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/register', register);
 app.use('/login', login);
 app.get('/logout', function (req, res, next) { // 登出销毁session
