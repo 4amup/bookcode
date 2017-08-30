@@ -2,5 +2,9 @@
 {% block content %}
   {% include 'menu.njk' %}
   <h1>{{ title }}</h1>
-  <p>Welcome to {{title}}</p>
+  {% if locals.user %}
+  <p>Welcome, {{ locals.user.name }}</p>
+  {% else %}
+  <p>Welcome to {{ title }}</p>
+  {% endif %}
 {% endblock %}
