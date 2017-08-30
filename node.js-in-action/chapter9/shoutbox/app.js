@@ -10,7 +10,7 @@ const message = require('./lib/message')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var register = require('./routes/register')
+var register = require('./routes/register');
 var app = express();
 
 // view engine setup
@@ -25,7 +25,7 @@ app.set('view engine', 'njk');
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
   secret: 'shoutbox',

@@ -58,7 +58,6 @@ User.prototype.hashPassword = function (cb) {
   let user = this
   crypto.pbkdf2(user.pass, 'salt', 100000, 512, 'sha512', (err, derivedKey) => {
     if (err) throw err
-    console.log(derivedKey.toString('hex'))
     user.pass = derivedKey
     cb()
   })
