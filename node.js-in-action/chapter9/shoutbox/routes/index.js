@@ -1,12 +1,18 @@
-var express = require('express');
-var router = express.Router();
+const router = require('express').Router();
+const Entry = require('../lib/entry')
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {
-    title: 'shoutbox',
-    locals: res.locals
-  });
+  Entry.getRange(0, -1, (err, entries) => {
+    if (err) return next(err)
+    
+    res.render('entries', { // 模板渲染
+      title: 'Entries',
+      entries: entries,
+      locals: res.locals
+    })
+  })
 });
 
 module.exports = router;

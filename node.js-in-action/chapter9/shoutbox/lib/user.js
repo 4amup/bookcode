@@ -6,7 +6,7 @@ db.on('error', err => {
   console.log(`Error ${err}`)
 })
 db.on('connect', () => {
-  console.log('redis数据库已连接')
+  console.log('redis_users数据库已连接')
 })
 
 // 构造函数的一般形式

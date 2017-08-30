@@ -1,0 +1,20 @@
+{% extends "layout.njk" %}
+  {% block content %}
+    {% include "menu.njk" %}
+    <h1>{{ title }}</h1>
+    <p>Fill in the form below to add a new post.</p>
+
+    {% include "message.njk" %}
+
+    <form action="/post" method="post">
+      <p>
+        <input type="text" name="entry[title]" placeholder="Title">
+      </p>
+      <p>
+        <textarea name="entry[body]" placeholder="Body"></textarea>
+      </p>
+      <p>
+        <input type="submit" value="Post">
+      </p>
+    </form>
+{% endblock %}
