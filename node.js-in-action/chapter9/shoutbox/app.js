@@ -5,6 +5,8 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
+const session = require('express-session');
+const message = require('./lib/message')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -25,6 +27,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  secret: 'shoutbox',
+  cookie: {maxAge: 1000 * 60} // 过期时间一分钟
+}))
+app.use(message) // 自定义的一个消息处理中间件
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
