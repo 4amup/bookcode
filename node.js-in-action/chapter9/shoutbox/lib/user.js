@@ -58,7 +58,7 @@ User.prototype.hashPassword = function (cb) {
   let user = this
   crypto.pbkdf2(user.pass, 'salt', 100000, 512, 'sha512', (err, derivedKey) => {
     if (err) throw err
-    user.pass = derivedKey
+    user.pass = derivedKey.toString()
     cb()
   })
 }
@@ -96,14 +96,15 @@ User.get = function (id, fn) {
 }
 
 // 认证
-User.anthenticate = function (name, pass, fn) {
+User.authenticate = function (name, pass, fn) {
   User.getByName(name, function (err, user) { // 通过名称查找用户
     if (err) return fn(err)
     if (!user.id) return fn() // 用户不存在
     // 以相同方式对密码做加盐处理
     crypto.pbkdf2(pass, 'salt', 100000, 512, 'sha512', (err, derivedKey) => {
       if (err) return fn(err)
-      if (derivedKey === user.pass) return fn(null, user) // 匹配发现项
+      let pass = derivedKey.toString()
+      if (pass === user.pass) return fn(null, user) // 匹配发现项
       fn()
     })
   })
