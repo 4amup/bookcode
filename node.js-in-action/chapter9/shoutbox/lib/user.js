@@ -74,6 +74,9 @@ User.prototype.hashPassword = function (cb) {
 //   if (err) throw err
 //   console.log(`user id ${tobi.id}`)
 // })
+
+// 从redis中取得用户
+// 这个函数的构造是使用回调函数来分离的
 User.getByName = function (name, fn) {
   User.getId(name, function (err, id) { // 根据名称查找用户
     if (err) return fn(err)
@@ -82,11 +85,11 @@ User.getByName = function (name, fn) {
 }
 
 User.getId = function (name, fn) {
-  db.get('user:id' + name, fn) // 取得由名称索引的ID
+  db.get('user:id:' + name, fn) // 取得由名称索引的ID
 }
 
 User.get = function (id, fn) {
-  db.hgetall('user:' + id, function (err, user) {
+  db.hgetall('user:' + id, function (err, user) { // 获取普通对象哈希
     if (err) return fn(err)
     fn(null, new User(user)) // 将普通对象转换成新的User
   })

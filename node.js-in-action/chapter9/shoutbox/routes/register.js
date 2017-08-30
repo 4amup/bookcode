@@ -14,6 +14,7 @@ router.post('/', (req, res, next) => {
     // redis will default ti
     if (user.id) { // 注册用户名已经被占用
       res.error('Username already taken!')
+      console.log('Username already taken!')
       res.redirect('back') // 后退到注册页面
     } else {
       user = new User({
