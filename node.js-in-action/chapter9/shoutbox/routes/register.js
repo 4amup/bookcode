@@ -3,7 +3,10 @@ const User = require('../lib/user')
 
 // get register 页面
 router.get('/', (req, res, next) => {
-  res.render('register', { title: 'Register' })
+  res.render('register', {
+    title: 'Register',
+    locals: res.locals
+  })
 })
 
 // post 表单注册

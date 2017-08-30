@@ -6,8 +6,8 @@ let res = express.response // express.response对象是给响应对象用的原�
 res.message = function (msg, type) {
   type = type || 'info'
   let sess = this.req.session // session取出来
-  sess.message = sess.message || [] // 默认取空数组
-  sess.message.push({type: type, string: msg})
+  sess.messages = sess.message || [] // 默认取空数组
+  sess.messages.push({type: type, string: msg})
 }
 
 // 错误消息的处理
@@ -17,9 +17,9 @@ res.error = function (msg) {
 
 // 输出中间件
 module.exports = function (req, res, next) {
-  res.locals.message = req.session.message || []
+  res.locals.messages = req.session.messages || []
   res.locals.removeMessages = function () {
-    req.session.message = []
+    req.session.messages = []
   }
   next()
 }
