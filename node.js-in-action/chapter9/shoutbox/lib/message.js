@@ -18,7 +18,7 @@ res.error = function (msg) {
 // 输出中间件
 module.exports = function (req, res, next) {
   res.locals.messages = req.session.messages || []
-  res.locals.removeMessages = function () { // to-do
+  res.locals.removeMessages = function () {
     req.session.messages = []
   }
   next()
