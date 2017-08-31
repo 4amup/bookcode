@@ -1,0 +1,11 @@
+{% extends "layout.njk" %}
+  {% block content %}
+    {% include "menu.njk" %}
+    {% for entry in entries %}
+      <div class="entry">
+        <h3>{{ entry.title }}</h3>
+        <p>{{ entry.body }}</p>
+        <p>Posted by {{ entry.username }}
+      </div>
+    {% endfor %}
+{% endblock %}
