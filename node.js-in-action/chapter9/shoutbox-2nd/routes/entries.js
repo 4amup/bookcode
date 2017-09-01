@@ -3,7 +3,10 @@ const Entry = require('../lib/entry')
 
 // get的函数
 function form (req, res, next) {
-  res.render('post', {title: 'Post form'});
+  res.render('post', {
+    title: 'Post form',
+    locals: res.locals
+  });
 }
 
 // 提交post的函数
