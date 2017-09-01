@@ -7,7 +7,7 @@ router.get('/', (req, res, next) => {
     title: 'Register',
     locals: res.locals
   })
-  res.locals.removeMessages()  
+  res.locals.removeMessages()
 })
 
 // post 表单注册

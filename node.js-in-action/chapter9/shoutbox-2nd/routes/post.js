@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Entry = require('../lib/entry')
+let validate = require('../lib/middleware/validate')
 
 // get的函数
 function form (req, res, next) {
@@ -27,7 +28,10 @@ function submit (req, res, next) {
 
 router.get('/', form)
 
-// router.get('/', form)
+// 加入自定义校验中间件
+router.use(validate.required('entry[title]'))
+router.use(validate.lengthAbove('entry[title]', 4))
+
 router.post('/', submit)
 
 module.exports = router
