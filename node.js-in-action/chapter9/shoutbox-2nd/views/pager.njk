@@ -1,0 +1,13 @@
+<div id="pager">
+  {% if (page.count > 1) %}
+    {% if (page.number) %}
+    <a id="prev" href="/?page{{ page.number }}">Prev</a>
+    {% endif %}
+    {% if (page.number < page.count -1) %}
+      {% if (page.mumber) %}
+      <a href="/?page{{ page.number + 2 }}">next</a>
+      {% endif %}
+    <a id="prev" href="/?page{{ page.number }}">Prev</a>
+    {% endif %}
+  {% endif %}
+</div>

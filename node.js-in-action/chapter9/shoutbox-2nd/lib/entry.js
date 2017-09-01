@@ -42,3 +42,8 @@ Entry.getRange = function (from, to, cb) {
     cb(null, entries)
   })
 }
+
+// 计数
+Entry.count = function (cb) {
+  db.llen('entries', cb) // 获取list长度命令
+}
