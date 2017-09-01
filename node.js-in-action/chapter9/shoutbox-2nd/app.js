@@ -13,7 +13,7 @@ let user = require('./lib/middleware/user')
 var index = require('./routes/index');
 var register = require('./routes/register');
 var login = require('./routes/login');
-var entries = require('./routes/entries');
+var post = require('./routes/post');
 var app = express();
 
 // view engine setup
@@ -41,7 +41,7 @@ app.use(user) // 自定义了一个通过session给页面传递user变量的中�
 app.use('/', index);
 app.use('/register', register);
 app.use('/login', login);
-app.use('/post', entries);
+app.use('/post', post);
 app.get('/logout', function (req, res, next) { // 登出销毁session
   req.session.destroy(err => {
     if (err) throw err
