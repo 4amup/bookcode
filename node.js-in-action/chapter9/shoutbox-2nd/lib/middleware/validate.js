@@ -34,7 +34,7 @@ module.exports = {
       if (getField(req, field).length > len) {
         next()
       } else {
-        res.error(field.join(' ' + ' must have more than ' + len + ' characters'))
+        res.error(field.join(' ') + ' must have more than ' + len + ' characters')
         res.redirect('back')
       }
     }
