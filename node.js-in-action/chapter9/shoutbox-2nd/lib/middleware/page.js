@@ -1,7 +1,8 @@
 module.exports = function (fn, perpage) {
   perpage = perpage || 10 // 默认每页显示10条记录
   return function (req, res, next) {
-    let page = Math.max(parseInt(req.param('page') || '1', 10), 1) - 1 // 将参数page解析为整数
+    // let page = Math.max(parseInt(req.param('page') || '1', 10), 1) - 1 // req.param()方法已经不推荐使用
+    let page = Math.max(parseInt(req.params.page || '1', 10), 1) - 1
 
     // 调用传入的取entry总数的函数
     fn(function (err, total) {

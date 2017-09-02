@@ -38,7 +38,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(message) // 自定义的一个消息处理中间件
 app.use(user) // 自定义了一个通过session给页面传递user变量的中间件
 
-app.use('/', index);
 app.use('/register', register);
 app.use('/login', login);
 app.use('/post', post);
@@ -48,6 +47,7 @@ app.get('/logout', function (req, res, next) { // 登出销毁session
     res.redirect('/')
   })
 });
+app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
