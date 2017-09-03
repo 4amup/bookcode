@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var register = require('./routes/register');
 var login = require('./routes/login');
 var post = require('./routes/post');
+var api = require('./routes/api')
 var app = express();
 
 // view engine setup
@@ -48,6 +49,10 @@ app.get('/logout', function (req, res, next) { // 登出销毁session
   })
 });
 app.use('/', index);
+
+// 设计API
+app.use('/api', api.auth) // 先认证才能加载用户名
+app.use(user)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
